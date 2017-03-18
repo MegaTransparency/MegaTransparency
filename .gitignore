@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+etl/socrata/config.json
+etl/socrata/datacatalog.json
+*.sagews
+
 # C extensions
 *.so
 
