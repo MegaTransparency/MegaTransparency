@@ -17,7 +17,7 @@ with open(os.path.join(dir_of_script, 'config.json'), 'r') as f:
 app_token = config.get('socrata_api_token', '')
 bigquery_table = config.get('bigquery_table')
 try:
-    cpus = multiprocessing.cpu_count() * 20
+    cpus = multiprocessing.cpu_count()
 except NotImplementedError:
     cpus = 2   # arbitrary default
 
@@ -75,7 +75,7 @@ def update_catalog():
     fresh_catalog = generate_catalog()
     old_rows = []
     if os.path.exists(catalog_file):
-        with open(os.path.join(dir_of_script, 'datacatalog.json'), 'r') as f:
+        with open(catalog_file, 'r') as f:
             old_rows = dict([(json.loads(row)['resource_id'], json.loads(row)) for row in f.readlines()])
         datasets_to_ignore = ['avj9-39zb'] # these sets are replaced everytime I check so pointless to look at them
         changed_results = [row for row in fresh_catalog if row['resource_updatedAt'] != old_rows.get(row['resource_id'], {}).get('resource_updatedAt', '') and row['resource_id'] not in datasets_to_ignore]
