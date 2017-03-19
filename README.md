@@ -45,6 +45,15 @@ Top competitors: https://socrata.com, https://carto.com/, https://opengov.com/, 
 * Make the blog
 * Make the website
 
+#### Income goals
+
+1. \$2,000/month: 100 \$19.99 subscribers (yes I know that 19.99 * 100 is just under 2K and that there will be credit card processing fees)
+  * $12,000/year in total compensation for Tim Clemans including social security taxes and benefits
+  * $12,000/year for computer related costs, records request fees, and other expenses/taxes and saving up
+1. \$40,000/month: 2,000 \$19.99 subscribers
+  * $240,000/year in total compensation for Tim Clemans including social security taxes and benefits
+  * $240,000/year for computer related costs, records request fees, and other expenses/taxes and saving up
+
 ### Status
 
 * Currently copying Socrata's data catalog to BigQuery. https://bigquery.cloud.google.com/table/freeopendata-161213:copy_of_socrata_data.data_catalog
