@@ -7,10 +7,11 @@ import math
 import traceback
 import sys
 
-# This script copies all known Socrata datasets to BigQuery and appends new rows
+# This script copies all known Socrata datasets to BigQuery and [will later] append new rows
 # It doesn't deal with deletes or updates yet because of the cost of doing so in the 
 # BigQuery API https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language
-# Plan is to make a dataset of updates
+# Plan is to make a dataset of updates/deletes
+# This script still needs a lot of work. Please open issues
 
 dir_of_script = os.path.dirname(os.path.realpath(__file__))
 catalog_file = os.path.join(dir_of_script, 'datacatalog.json')
