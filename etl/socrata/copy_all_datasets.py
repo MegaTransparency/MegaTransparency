@@ -20,13 +20,17 @@ with open(os.path.join(dir_of_script, 'config.json'), 'r') as f:
 app_token = config.get('socrata_api_token', '')
 bigquery_table = config.get('bigquery_table')
 try:
-    cpus = multiprocessing.cpu_count()
+    cpus = multiprocessing.cpu_count() * 10
 except NotImplementedError:
     cpus = 2   # arbitrary default
 
 def copy_dataset(dataset):
+    existing_tables = [row.split()[0] for row in os.popen('bq ls copy_of_socrata_data').readlines()[2:]]
     domain = dataset['domain']
     did = dataset['id']
+    table_name = '%s_%s' % (domain.replace('.', '_'), did.replace('-', '_'))
+    if table_name in existing_tables:
+        return
     try:
         new_did = requests.get('https://%s/api/migrations/%s.json' % (domain, did)).json().get('nbeId')
         if not new_did:
@@ -39,11 +43,12 @@ def copy_dataset(dataset):
         if os.stat(path).st_size==0:
             os.system('rm %s' % (path))
             return
-        cmd = 'bq load --autodetect --max_bad_records=10000000 --skip_leading_rows=1 --source_format=CSV copy_of_socrata_data.%s_%s /home/main/gdriveforfod/public/socrata_data/%s_%s_%s.csv' % (domain.replace('.', '_'), did.replace('-', '_'), domain.replace('.', '_'), did.replace('-', '_'), last_update)
+        cmd = 'bq load --nosync --autodetect --max_bad_records=10000000 --skip_leading_rows=1 --source_format=CSV copy_of_socrata_data.%s_%s /home/main/gdriveforfod/public/socrata_data/%s_%s_%s.csv' % (domain.replace('.', '_'), did.replace('-', '_'), domain.replace('.', '_'), did.replace('-', '_'), last_update)
         print cmd
         os.system(cmd)
     except KeyboardInterrupt:
         os.system("kill -9 $(ps aux | grep '[p]ython etl/socrata/copy_all_datasets.py' | awk '{print $2}')")
+        os.system("kill -9 $(ps aux | grep '[p]ython FreeOpenData/etl/socrata/copy_all_datasets.py' | awk '{print $2}')")
         raise KeyboardInterruptError()
     except Exception, err:
         
@@ -71,6 +76,7 @@ while True:
         os.execv(sys.executable, ['python', __file__])
     except KeyboardInterrupt:
         os.system("kill -9 $(ps aux | grep '[p]ython etl/socrata/copy_all_datasets.py' | awk '{print $2}')")
+        os.system("kill -9 $(ps aux | grep '[p]ython FreeOpenData/etl/socrata/copy_all_datasets.py' | awk '{print $2}')")
         sys.exit()
     except Exception, err:
         traceback.print_exc()
