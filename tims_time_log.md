@@ -1,6 +1,6 @@
 3/19/17
 
-1:40AM - : cleaning up mission statement, fixing 
+1:40AM - 3:30AM: cleaning up mission statement, adding details to readme
 
 3/18/17
 
