@@ -1,5 +1,6 @@
 3/19/17
 
+5:11AM - : debugging script that copies Socrata datasets to BigQuery
 3:30AM - 3:51AM: adding income goals to readme
 1:40AM - 3:30AM: cleaning up mission statement, adding details to readme
 

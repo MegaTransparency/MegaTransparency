@@ -5,6 +5,7 @@ __pycache__/
 
 etl/socrata/config.json
 etl/socrata/datacatalog.json
+etl/socrata/last_update_times.json
 *.sagews
 
 # C extensions
