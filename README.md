@@ -1,6 +1,10 @@
 # FreeOpenData.com
 
-FreeOpenData.com is a soon to be launched website centralizing open data, data journalism, open data powered apps, and publishers and users of open data. The Founder/Chief Innvoation Officer of FreeOpenData.com is Tim Clemans, whose job is to overwhelm the competition with innovation and transparency. Email us at info@freeopendata.com Note emails will be auto published. 
+FreeOpenData.com is a soon to be launched website centralizing open data, data journalism, open data powered apps, and publishers and users of open data. The Founder/Chief Innvoation Officer of FreeOpenData.com is Tim Clemans, whose job is to overwhelm the competition with innovation and transparency. Tim's day: code all night, go to Farestart, code, eat, sleep, and right back at making the world better through open data. Performance goal: get Kevin Merritt, CEO of Socrata (Tim lives a block away from their HQ), to send a hastily written company wide email saying "we must take right a right turn right now or a homeless dude is going to put us out of business." Email us at info@freeopendata.com Note emails will be auto published. 
+
+## Big thanks to
+
+King County criminal justice system, my parents, girlfriend, and Farestart for getting me the right path. The Seattle Police Department for getting me started in automated transparency. William Stein, Founder/CEO of https://sagemath.com, for introducing me cutting edge open source technologies. Chris Metcalf, developer evangelist, for mentoring me and encouraging the company to hire me as a contractor. Bet there's going to be hell to pay for whoever's fault it was that my contract got voided right when I was supposed to start working meaning non-compete clause disappeared. Renee Tate https://twitter.com/BecomingDataSci for daily inspiration, discussion, and networking. John Sonmez https://simpleprogrammer.com/ for his blog, courses, and book. 
 
 ## Mission and Strategy
 
