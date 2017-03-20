@@ -1,6 +1,6 @@
 # FreeOpenData.com
 
-FreeOpenData.com is a soon to be launched website centralizing open data, data journalism, open data powered apps, and publishers and users of open data. 
+FreeOpenData.com is a soon to be launched website centralizing open data, data journalism, open data powered apps, and publishers and users of open data. The Founder/Chief Innvoation Officer of FreeOpenData.com is Tim Clemans, whose job is to overwhelm the competition with innovation and transparency. Email us at info@freeopendata.com Note emails will be auto published. 
 
 ## Mission and Strategy
 
@@ -32,7 +32,10 @@ The site was created in response to http://datasmart.ash.harvard.edu/news/articl
 ## Values
 
 * Transparent by default: 
-** clear business rules, all code is open source under Apache License unless using an existing code base that is licensed as GPL/AGPL (Wordpress/CKAN/CoCalc)
+  * Clear business rules
+  * Staff mark what information is exempt
+  * Non-exempt information is auto published
+  * All code is open source under Apache License unless using an existing code base that is licensed as GPL/AGPL (Wordpress/CKAN/CoCalc)
 
 ## Competitors
 
@@ -54,12 +57,12 @@ Initially we're focused on competeting with MuckRock and DataWorld because these
 #### Income goals
 
 1. \$2,000/month: 100 \$19.99 subscribers (yes I know that 19.99 * 100 is just under 2K and that there will be credit card processing fees)
-  * $12,000/year in total compensation for Tim Clemans including social security taxes and benefits
-  * $12,000/year for computer related costs, records request fees, and other expenses/taxes and saving up
-1. \$40,000/month: 2,000 \$19.99 subscribers
-  * $240,000/year in total compensation for Tim Clemans including social security taxes and benefits
-  * $120,000/year for computer related costs, records request fees, and other expenses/taxes and saving up
-  * $120,000/year for filing public disclosure related lawsuits
+   * $12,000/year in total compensation for Tim Clemans including social security taxes and benefits
+   * $12,000/year for computer related costs, records request fees, and other expenses/taxes and saving up
+2. \$40,000/month: 2,000 \$19.99 subscribers
+   * $240,000/year in total compensation for Tim Clemans including social security taxes and benefits
+   * $120,000/year for computer related costs, records request fees, and other expenses/taxes and saving up
+   * $120,000/year for filing public disclosure related lawsuits
 
 ### Status
 
