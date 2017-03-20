@@ -1,6 +1,6 @@
 3/19/17
 
-* 9:05PM - : setting up wordpress, ran into redirect issue that stuggled to resolve
+* 9:05PM - 11:45PM: setting up wordpress, ran into redirect issue that stuggled to resolve
 * 9:00PM - 9:05PM: made video
 * 7:12PM - 7:57PM: add to readme
 * 4:55PM - 5:15PM: write down on paper (I need to go paperless just like the government) blog post ideas
