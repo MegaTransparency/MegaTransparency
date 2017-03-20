@@ -4,7 +4,7 @@ FreeOpenData.com is a soon to be launched website centralizing open data, data j
 
 ## Big thanks to
 
-King County criminal justice system, my parents, girlfriend, and Farestart for getting me the right path. The Seattle Police Department for getting me started in automated transparency. William Stein, Founder/CEO of https://sagemath.com, for introducing me cutting edge open source technologies. Chris Metcalf, developer evangelist, for mentoring me and encouraging the company to hire me as a contractor. Bet there's going to be hell to pay for whoever's fault it was that my contract got voided right when I was supposed to start working meaning non-compete clause disappeared. Renee Tate https://twitter.com/BecomingDataSci for daily inspiration, discussion, and networking. John Sonmez https://simpleprogrammer.com/ for his blog, courses, and book. 
+King County criminal justice system, Sound Mental Health, my parents, girlfriend, and Farestart for getting me the right path. The Seattle Police Department for getting me started in automated transparency. William Stein, Founder/CEO of https://sagemath.com, for introducing me cutting edge open source technologies. Chris Metcalf, developer evangelist, for mentoring me and encouraging the company to hire me as a contractor. Bet there's going to be hell to pay for whoever's fault it was that my contract got voided right when I was supposed to start working meaning non-compete clause disappeared. Renee Tate https://twitter.com/BecomingDataSci for daily inspiration, discussion, and networking. John Sonmez https://simpleprogrammer.com/ for his blog, courses, and book. 
 
 ## Mission and Strategy
 
