@@ -1,5 +1,7 @@
 3/19/17
 
+* 7:12PM - 7:57PM: add to readme
+* 4:55PM - 5:15PM: write down on paper (I need to go paperless just like the government) blog post ideas
 * 3:40PM - 4:05PM: tweeting with folks that lead to decision to make detailed log of Socrata to BigQuery ETL and add more info about who competing with and when to readme
 * 5:11AM - 6:21AM: debugging script that copies Socrata datasets to BigQuery and sending tweet to BigQuery outreach person
 * 3:30AM - 3:51AM: adding income goals to readme
