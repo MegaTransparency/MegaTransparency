@@ -1,8 +1,10 @@
 # FreeOpenData.com
 
+FreeOpenData.com is a soon to be launched website centralizing open data, data journalism, open data powered apps, and publishers and users of open data. 
+
 ## Mission and Strategy
 
-The mission of FreeOpenData.com is to make organizations, particularly government agencies, transparent by default. Its strategy is to create overwhelming public demand for transparency, advocate well for forceful black and white transparency laws, make the disclosure of information as efficient as possible, use public disclosure laws to their fullest reasonable potential, and make it extremely easy to make positive use of open data. A key strategy for making governments transparent by default is to get to the point where FreeOpenData can completely take over transparency work at no cost to each agency. The information would be made available to the public completely free. In order to do this, FreeOpenData needs about sixty million dollars a year just for Washington State. So the business plan is to create the most popular open data site and generate money through subscription plans, consulting, advertising, job boards, book and course publishing, affiliate marketing, and swag.
+The mission of FreeOpenData.com is to make organizations, particularly government agencies, transparent by default. The short version of the strategy is make billions of dollars each year so we can offer governments the sweet deal of taking over transparency efforts for free. The long version of the strategy is to create overwhelming public demand for transparency, advocate well for forceful black and white transparency laws, make the disclosure of information as efficient as possible, use public disclosure laws to their fullest reasonable potential, and make it extremely easy to make positive use of open data. A key strategy for making governments transparent by default is to get to the point where FreeOpenData can completely take over transparency work at no cost to each agency. The information would be made available to the public completely free. In order to do this, FreeOpenData needs about sixty million dollars a year just for Washington State. So the business plan is to create the most popular open data site and generate money through subscription plans, consulting, advertising, job boards, book and course publishing, affiliate marketing, and swag.
 
 We will generate overwhelming public demand for transparency by putting on lots of public presentations about transparency, being on the news every month advocating that the public demand transparency. We will track the uses of transparency.
 
@@ -29,9 +31,12 @@ The site was created in response to http://datasmart.ash.harvard.edu/news/articl
 
 ## Values
 
-* Transparent by default: clear business rules, all code is open source under Apache License unless using an existing code base that is licensed as GPL/AGPL (Wordpress/CKAN/CoCalc)
+* Transparent by default: 
+** clear business rules, all code is open source under Apache License unless using an existing code base that is licensed as GPL/AGPL (Wordpress/CKAN/CoCalc)
 
 ## Competitors
+
+Competitive strategy: overhelm the competition with innovation and transparency
 
 Top competitors: https://muckrock.com, https://data.world, https://socrata.com, https://carto.com/, https://opengov.com/, http://govqa.com/, and https://www.nextrequest.com/.
 
