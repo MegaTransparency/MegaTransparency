@@ -1,3 +1,7 @@
+3/20/17
+
+* 7:22PM - 7:46PM: thinking about what needs to be done for launch, wrote 3 issues
+
 3/19/17
 
 * 9:05PM - 11:45PM: setting up wordpress, ran into redirect issue that stuggled to resolve
