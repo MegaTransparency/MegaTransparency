@@ -1,11 +1,12 @@
 3/21/17
 
-* 7:56PM - 8:57PM: https://github.com/wayeasycorp/FreeOpenData/issues/2
-* 7:14PM - 7:51PM: https://github.com/wayeasycorp/FreeOpenData/issues/2
-* 6:40PM - 7:14PM: little improvements to copy all socrata data
+* 7:25AM - 7:30AM: for https://github.com/wayeasycorp/FreeOpenData/issues/2 add verify=False
 
 3/20/17
 
+* 7:56PM - 8:57PM: https://github.com/wayeasycorp/FreeOpenData/issues/2
+* 7:14PM - 7:51PM: https://github.com/wayeasycorp/FreeOpenData/issues/2
+* 6:40PM - 7:14PM: little improvements to copy all socrata data
 * 7:22AM - 7:46AM: thinking about what needs to be done for launch, wrote 3 issues
 
 3/19/17
