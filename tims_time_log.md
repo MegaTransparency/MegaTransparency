@@ -1,6 +1,11 @@
+3/21/17
+
+7:14PM - : https://github.com/wayeasycorp/FreeOpenData/issues/2
+6:40PM - 7:14PM: little improvements to copy all socrata data
+
 3/20/17
 
-* 7:22PM - 7:46PM: thinking about what needs to be done for launch, wrote 3 issues
+* 7:22AM - 7:46AM: thinking about what needs to be done for launch, wrote 3 issues
 
 3/19/17
 
