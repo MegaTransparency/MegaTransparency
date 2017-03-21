@@ -1,8 +1,14 @@
 # FreeOpenData.com
 
+FreeOpenData.com is a soon to be launched website centralizing open data, data journalism, open data powered apps, and publishers and users of open data. The Founder/Chief Innvoation Officer of FreeOpenData.com is Tim Clemans, whose job is to overwhelm the competition with innovation and transparency. Tim's day: code all night, go to Farestart, code, eat, sleep, and right back at making the world better through open data. Performance goal: get Kevin Merritt, CEO of Socrata (Tim lives a block away from their HQ), to send a hastily written company wide email saying "we must take right a right turn right now or a homeless dude is going to put us out of business." Email us at info@freeopendata.com Note emails will be auto published. 
+
+## Big thanks to
+
+King County criminal justice system, Sound Mental Health, my parents, girlfriend, and Farestart for getting me the right path. The Seattle Police Department for getting me started in automated transparency. William Stein, Founder/CEO of https://sagemath.com, for introducing me cutting edge open source technologies. Chris Metcalf, developer evangelist, for mentoring me and encouraging the company to hire me as a contractor. Bet there's going to be hell to pay for whoever's fault it was that my contract got voided right when I was supposed to start working meaning non-compete clause disappeared. Renee Teate https://twitter.com/BecomingDataSci for daily inspiration, discussion, and networking. John Sonmez https://simpleprogrammer.com/ for his blog, courses, and book. 
+
 ## Mission and Strategy
 
-The mission of FreeOpenData.com is to make organizations, particularly government agencies, transparent by default. Its strategy is to create overwhelming public demand for transparency, advocate well for forceful black and white transparency laws, make the disclosure of information as efficient as possible, use public disclosure laws to their fullest reasonable potential, and make it extremely easy to make positive use of open data. A key strategy for making governments transparent by default is to get to the point where FreeOpenData can completely take over transparency work at no cost to each agency. The information would be made available to the public completely free. In order to do this, FreeOpenData needs about sixty million dollars a year just for Washington State. So the business plan is to create the most popular open data site and generate money through subscription plans, consulting, advertising, job boards, book and course publishing, affiliate marketing, and swag.
+The mission of FreeOpenData.com is to make organizations, particularly government agencies, transparent by default. The short version of the strategy is make billions of dollars each year so we can offer governments the sweet deal of taking over transparency efforts for free. The long version of the strategy is to create overwhelming public demand for transparency, advocate well for forceful black and white transparency laws, make the disclosure of information as efficient as possible, use public disclosure laws to their fullest reasonable potential, and make it extremely easy to make positive use of open data. A key strategy for making governments transparent by default is to get to the point where FreeOpenData can completely take over transparency work at no cost to each agency. The information would be made available to the public completely free. In order to do this, FreeOpenData needs about sixty million dollars a year just for Washington State. So the business plan is to create the most popular open data site and generate money through subscription plans, consulting, advertising, job boards, book and course publishing, affiliate marketing, and swag.
 
 We will generate overwhelming public demand for transparency by putting on lots of public presentations about transparency, being on the news every month advocating that the public demand transparency. We will track the uses of transparency.
 
@@ -27,15 +33,21 @@ Make the use of open data so easy that people pay good money to use the same too
 
 The site was created in response to http://datasmart.ash.harvard.edu/news/article/an-open-letter-to-the-open-data-community-988 and an erroneous Google marketing blurb claiming public datasets are hosted for free on BigQuery. FreeOpenData.com is owned by WayEasy Corporation, which is lead by Tim Clemans https://transparenttim.com. Tim had the honor of working for Seattle Police as an employee piloting automatic publishing of over-redacted body camera videos and police report narratives to give frequent records requesters a tool for making narrow records requests, see https://www.nytimes.com/2016/10/23/magazine/police-body-cameras.html?_r=0 Tim is currently homeless, housed in a private room in a shelter, while he finishes life skills and food service training at http://farestart.org Starting in about two months, he needs to make about a thousand a month to make ends meet. Becoming a contractor for Socrata to improve on what he did at Seattle Police fell through and his last employer SageMath Inc https://sagemathcloud.com decided it was too stressful to review the code he wrote. So now he's focusing on employing himself to make governments transparent by default. Funding for the site currently comes from Tim's parents. 
 
-
-
 ## Values
 
-* Transparent by default: clear business rules, all code is open source under Apache License unless using an existing code base that is licensed as GPL/AGPL (Wordpress/CKAN/CoCalc)
+* Transparent by default: 
+  * Clear business rules
+  * Staff mark what information is exempt
+  * Non-exempt information is auto published
+  * All code is open source under Apache License unless using an existing code base that is licensed as GPL/AGPL (Wordpress/CKAN/CoCalc)
 
 ## Competitors
 
-Top competitors: https://socrata.com, https://carto.com/, https://opengov.com/, https://data.world, and https://muckrock.com
+Competitive strategy: overhelm the competition with innovation and transparency
+
+Top competitors: https://muckrock.com, https://data.world, https://socrata.com, https://carto.com/, https://opengov.com/, http://govqa.com/, and https://www.nextrequest.com/.
+
+Initially we're focused on competeting with MuckRock and DataWorld because these sites focus on making money from end users like us. It'll take time to build the government relationships needed to compete with Socrata, OpenGov, Carto, GovQA, and NextRequest. It's important that Socrata in particular see FreeOpenData as encouraging more agencies to adopt open data and look into Socrata. Maybe they can be advertisers at some point if user is using a known government computer. One strategy to consider with say Socrata is to say "We want transparency to be free and as automated as possible. What do you think of focusing on becoming the analytics platform governments rely on and make transparency an automatic byproduct of that?"
 
 ## Roadmap and Status
 
@@ -49,12 +61,12 @@ Top competitors: https://socrata.com, https://carto.com/, https://opengov.com/, 
 #### Income goals
 
 1. \$2,000/month: 100 \$19.99 subscribers (yes I know that 19.99 * 100 is just under 2K and that there will be credit card processing fees)
-  * $12,000/year in total compensation for Tim Clemans including social security taxes and benefits
-  * $12,000/year for computer related costs, records request fees, and other expenses/taxes and saving up
-1. \$40,000/month: 2,000 \$19.99 subscribers
-  * $240,000/year in total compensation for Tim Clemans including social security taxes and benefits
-  * $120,000/year for computer related costs, records request fees, and other expenses/taxes and saving up
-  * $120,000/year for filing public disclosure related lawsuits
+   * $12,000/year in total compensation for Tim Clemans including social security taxes and benefits
+   * $12,000/year for computer related costs, records request fees, and other expenses/taxes and saving up
+2. \$40,000/month: 2,000 \$19.99 subscribers
+   * $240,000/year in total compensation for Tim Clemans including social security taxes and benefits
+   * $120,000/year for computer related costs, records request fees, and other expenses/taxes and saving up
+   * $120,000/year for filing public disclosure related lawsuits
 
 ### Status
 
