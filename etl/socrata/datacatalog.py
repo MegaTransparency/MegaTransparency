@@ -38,19 +38,42 @@ def get_catalog_for_region(region, hidden=False):
     else:
         hidden = ''
     results = []
-    query_results = requests.get('http://api.%s.socrata.com/api/catalog/v1?only=datasets%s&limit=10000' % (region, hidden), timeout=10)
+    url = 'http://api.%s.socrata.com/api/catalog/v1?only=datasets%s&limit=10000' % (region, hidden)
+    print 'URL', url
+    query_results = requests.get(url, timeout=10)
     query_results = query_results.json()
     results.extend(query_results['results'])
     datasets_count = query_results['resultSetSize']
     loops = int(math.ceil(float(datasets_count) / 10000))
-    
-    pool = multiprocessing.Pool(processes=cpus)
-    for result in pool.map(get_dataset_list, [(region, i, hidden) for i in range(1, loops)]):
-        results.extend(result)
-    pool.close()
+    try:
+        pool = multiprocessing.Pool(processes=cpus)
+        for result in pool.map(get_dataset_list, [(region, i, hidden) for i in range(1, loops)]):
+            results.extend(result)
+        pool.close()
+    except KeyboardInterrupt:
+        os.system("kill -9 $(ps aux | grep '[p]ython FreeOpenData/etl/socrata/datacatalog.py' | awk '{print $2}')")
+        raise KeyboardInterruptError()
+    rows_to_remove = []
     for i, row in enumerate(results):
         results[i] = flatten_dict(row)
         results[i]['api_url'] = results[i]['permalink'].replace('/d/', '/resource/') + '.json'
+        results[i]['id_for_2_point_1_api'] = ''
+        row = results[i]
+        try:
+            s = requests.Session()
+            a = requests.adapters.HTTPAdapter(max_retries=1)
+            s.mount('http://', a)
+            url = 'https://%s/api/migrations/%s.json' % (row['metadata_domain'], row['resource_id'])
+            new_did = s.get(url, timeout=2, verify=False).json().get('nbeId')
+            if new_did:
+                results[i]['id_for_2_point_1_api'] = new_did
+        except Exception, err:
+            print sorted(row.keys())
+            print 
+            traceback.print_exc()
+            rows_to_remove.append(i)
+    for i, row_i in enumerate(rows_to_remove):
+        del results[row_i-i]
     return results
 
 def generate_catalog():
@@ -82,16 +105,20 @@ def update_catalog():
     else:
         changed_results = fresh_catalog
     if changed_results:
-        pool = multiprocessing.Pool(processes=cpus)
-        results = pool.map(add_count, changed_results)
-        pool.close()
-        if old_rows:
-            for row in results:
-                old_rows[row['resource_id']] = row
-            results = old_rows.values()
+        try:
+            pool = multiprocessing.Pool(processes=cpus)
+            results = pool.map(add_count, changed_results)
+            pool.close()
+        except KeyboardInterrupt:
+            os.system("kill -9 $(ps aux | grep '[p]ython FreeOpenData/etl/socrata/datacatalog.py' | awk '{print $2}')")
+            raise KeyboardInterruptError()
+        fresh_rows = dict([(row['resource_id'], row) for row in fresh_catalog])
+        for row in results:
+            fresh_rows[row['resource_id']] = row
+        results = fresh_rows.values()
         with open(catalog_file, 'w') as f:
             f.write('\n'.join([json.dumps(row) for row in results]))
-        cmd = 'bq load --replace --max_bad_records=10000 --source_format=NEWLINE_DELIMITED_JSON %s %s &>/dev/null &' % (bigquery_table, catalog_file)
+        cmd = 'bq load --autodetect --replace --max_bad_records=10000 --source_format=NEWLINE_DELIMITED_JSON %s %s &>/dev/null &' % (bigquery_table, catalog_file)
         print cmd
         os.system(cmd)
 
