@@ -1,5 +1,6 @@
 3/21/17
 
+* 8:00PM - 8:25PM: https://github.com/wayeasycorp/FreeOpenData/issues/9 struggling with logging into postgres via command line
 * 7:30PM - 7:40PM: github
 * 7:00PM - 7:30PM: https://github.com/wayeasycorp/FreeOpenData/issues/4
 * 7:25AM - 7:30AM: for https://github.com/wayeasycorp/FreeOpenData/issues/2 add verify=False
