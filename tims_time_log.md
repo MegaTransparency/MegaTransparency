@@ -1,5 +1,6 @@
 3/21/17
 
+* 8:30PM - 9:06PM: got login via command line working but can't seem to create database tables like before
 * 8:00PM - 8:25PM: https://github.com/wayeasycorp/FreeOpenData/issues/9 struggling with logging into postgres via command line
 * 7:30PM - 7:40PM: github
 * 7:00PM - 7:30PM: https://github.com/wayeasycorp/FreeOpenData/issues/4
