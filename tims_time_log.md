@@ -1,3 +1,7 @@
+3/22/17
+
+5:00AM - 5:40AM: got database table creation working
+
 3/21/17
 
 * 8:30PM - 9:06PM: got login via command line working but can't seem to create database tables like before
