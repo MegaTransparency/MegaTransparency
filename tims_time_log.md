@@ -1,5 +1,7 @@
 3/21/17
 
+* 7:30PM - 7:40PM: github
+* 7:00PM - 7:30PM: https://github.com/wayeasycorp/FreeOpenData/issues/4
 * 7:25AM - 7:30AM: for https://github.com/wayeasycorp/FreeOpenData/issues/2 add verify=False
 
 3/20/17
