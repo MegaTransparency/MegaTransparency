@@ -1,5 +1,6 @@
 3/22/17
 
+* 6:20AM - 6:30AM: commiting code pushing
 * 5:00AM - 5:40AM: got database table creation working
 
 3/21/17
