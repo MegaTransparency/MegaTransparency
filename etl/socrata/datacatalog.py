@@ -32,6 +32,17 @@ def get_dataset_list(info):
     region, i, hidden = info
     return requests.get('http://api.%s.socrata.com/api/catalog/v1?only=datasets%s&limit=10000&offset=%s' % (region, hidden, str(10000*i)), timeout=10).json()['results']
 
+def get_2_point_1_id(row):
+    row = flatten_dict(row)
+    try:
+        s = requests.Session()
+        a = requests.adapters.HTTPAdapter(max_retries=1)
+        s.mount('http://', a)
+        url = 'https://%s/api/migrations/%s.json' % (row['metadata_domain'], row['resource_id'])
+        return (row['metadata_domain'] + '_' + row['resource_id'], s.get(url, timeout=2, verify=False).json().get('nbeId', ''))
+    except:
+        return (row['metadata_domain'] + '_' + row['resource_id'], 'doesnt_exist')
+
 def get_catalog_for_region(region, hidden=False):
     if hidden:
         hidden = '&domains=moto.data.socrata.com,odn.data.socrata.com,opendata.socrata.com'
@@ -53,24 +64,21 @@ def get_catalog_for_region(region, hidden=False):
     except KeyboardInterrupt:
         os.system("kill -9 $(ps aux | grep '[p]ython FreeOpenData/etl/socrata/datacatalog.py' | awk '{print $2}')")
         raise KeyboardInterruptError()
+    try:
+        pool = multiprocessing.Pool(processes=cpus)
+        two_point_1_ids = dict(pool.map(get_2_point_1_id, results))
+        pool.close()
+    except KeyboardInterrupt:
+        os.system("kill -9 $(ps aux | grep '[p]ython FreeOpenData/etl/socrata/datacatalog.py' | awk '{print $2}')")
+        raise KeyboardInterruptError()
     rows_to_remove = []
     for i, row in enumerate(results):
         results[i] = flatten_dict(row)
         results[i]['api_url'] = results[i]['permalink'].replace('/d/', '/resource/') + '.json'
-        results[i]['id_for_2_point_1_api'] = ''
         row = results[i]
-        try:
-            s = requests.Session()
-            a = requests.adapters.HTTPAdapter(max_retries=1)
-            s.mount('http://', a)
-            url = 'https://%s/api/migrations/%s.json' % (row['metadata_domain'], row['resource_id'])
-            new_did = s.get(url, timeout=2, verify=False).json().get('nbeId')
-            if new_did:
-                results[i]['id_for_2_point_1_api'] = new_did
-        except Exception, err:
-            print sorted(row.keys())
-            print 
-            traceback.print_exc()
+        key = row['metadata_domain'] + '_' + row['resource_id']
+        results[i]['id_for_2_point_1_api'] = two_point_1_ids[key]
+        if two_point_1_ids[key] == 'doesnt_exist':
             rows_to_remove.append(i)
     for i, row_i in enumerate(rows_to_remove):
         del results[row_i-i]

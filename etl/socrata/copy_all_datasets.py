@@ -44,9 +44,14 @@ def copy_dataset(dataset):
             os.system('wget "https://%s/resource/%s.csv?\$select=:id as socrata_id,:updated_at as socrata_updated_at,:created_at as socrata_created_at,%s&\$limit=90000000&\$\$app_token=%s&\$where=:updated_at <= %s%s%s" -O %s' % (domain, new_did, columns, app_token, '' if last_update.isdigit() else "'", last_update, '' if last_update.isdigit() else "'", path))
         except OSError:
             os.system('fusermount -u /home/main/gdriveforfod/; google-drive-ocamlfuse /home/main/gdriveforfod')
-        if os.stat(path).st_size==0:
-            os.system('rm %s' % (path))
-            return
+            return copy_dataset(dataset)
+        try:
+            if os.stat(path).st_size==0:
+                os.system('rm %s' % (path))
+                return
+        except:
+            os.system('fusermount -u /home/main/gdriveforfod/; google-drive-ocamlfuse /home/main/gdriveforfod')
+            return copy_dataset(dataset)
         cmd = 'bq load --nosync --autodetect --max_bad_records=10000000 --skip_leading_rows=1 --source_format=CSV copy_of_socrata_data.%s_%s /home/main/gdriveforfod/public/socrata_data/%s_%s_%s.csv' % (domain.replace('.', '_'), did.replace('-', '_'), domain.replace('.', '_'), did.replace('-', '_'), last_update)
         print cmd
         os.system(cmd)
