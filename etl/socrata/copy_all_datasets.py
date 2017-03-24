@@ -37,7 +37,11 @@ def copy_dataset(dataset):
         if not new_did:
             new_did = did
         url = 'https://%s/resource/%s.json?$select=:updated_at&$order=:updated_at DESC&$limit=1&$$app_token=%s' % (domain, new_did, app_token)
-        last_update = str(requests.get(url).json()[0][':updated_at'])
+        print url
+        try:
+            last_update = str(requests.get(url, verify=False).json()[0][':updated_at'])
+        except:
+            print requests.get(url, verify=False).text
         columns = ','.join([row['fieldName'] for row in requests.get('https://%s/views/%s.json' % (domain, did)).json()['columns']])
         path = '/home/main/gdriveforfod/public/socrata_data/%s_%s_%s.csv' % (domain.replace('.', '_'), did.replace('-', '_'), last_update)
         try:
@@ -77,6 +81,8 @@ def copy_all_the_data():
     pool.close()
     with open(os.path.join(dir_of_script, 'last_update_times.json'), 'w') as f:
         f.write(json.dumps(last_update_times))
+
+os.system('fusermount -u /home/main/gdriveforfod/; google-drive-ocamlfuse /home/main/gdriveforfod')
 
 while True:
     try:

@@ -30,9 +30,18 @@ class Session(db.Model):
     
     __tablename__ = "sessions"
     
-    uid = db.Column(db.String, primary_key=True, nullable=False)
+    uuid = Column(UUID(as_uuid=True),
+        server_default=sqlalchemy.text("uuid_generate_v4()"), primary_key=True)
     created = db.Column(db.DateTime, default=datetime.datetime.utcnow, nullable=False)
     user_uuid = Column(UUID(as_uuid=True), db.ForeignKey("users.user_uuid"), nullable=False)
     active = db.Column(db.Boolean, default=True, nullable=False)
     data = db.Column(postgresql.JSONB, nullable=True)
+
+class SocrataDatasets(db.Model):
+    
+    __tablename__ = "socrata_datasets"
+    
+    domain_and_id = db.Column(db.String, primary_key=True)
+    data = db.Column(postgresql.JSONB, nullable=False)
+
     
