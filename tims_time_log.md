@@ -1,5 +1,11 @@
+3/23/17
+
+* 1:33PM - : https://github.com/wayeasycorp/FreeOpenData/issues/14
+
 3/22/17
 
+* 5:00PM - 9:00PM: Open Seattle: talked with Socrata's Chris Metcalf and a person on the migrations team about how to improve the Socrata to BigQuery ETL.
+* 6:20AM - 6:30AM: commiting code pushing
 * 5:00AM - 5:40AM: got database table creation working
 
 3/21/17
