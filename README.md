@@ -103,6 +103,7 @@ sudo service ssh restart
 sudo apt-get update
 sudo apt-get install -y build-essential python-dev git-core python-pip virtualenv nginx
 git clone https://github.com/wayeasycorp/FreeOpenData.git
+cd FreeOpenData
 cp _config.py.example _config.py
 virtualenv env --distribute
 source venv/bin/activate
@@ -115,4 +116,16 @@ CREATE USER freeopendata WITH PASSWORD '****changeme****';
 GRANT ALL PRIVILEGES ON DATABASE "freeopendata" to freeopendata;
 \connect freeopendata
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+\q
+```
+Update _config.py
+```
+python manage.py db upgrade
+uwsgi --socket 0.0.0.0:8000 --protocol=http -w wsgi --callable=app
+```
+
+```
+sudo cp etc_nginx_sites_available_freeopendata_com /etc/nginx/sites-available/freeopendata.com
+sudo ln -s /etc/nginx/sites-available/freeopendata.com /etc/nginx/sites-enabled/freeopendata.com
+sudo service nginx restart
 ```
