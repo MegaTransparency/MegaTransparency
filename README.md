@@ -90,7 +90,7 @@ This guide assumes you are using Ubuntu Xenial on Scaleway C2L.
 ```
 adduser main
 usermod -aG sudo main
-echo "main ALL=(ALL) ALL" >> /etc/sudoers
+echo "main ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 cp -R .ssh /home/main/.ssh
 chown main -R /home/main/.ssh
 chmod 700 /home/main/.ssh
@@ -103,7 +103,14 @@ sudo service ssh restart
 sudo apt-get update
 sudo apt-get install -y build-essential python-dev git-core python-pip virtualenv nginx
 git clone https://github.com/wayeasycorp/FreeOpenData.git
+cp _config.py.example _config.py
 virtualenv env --distribute
 source venv/bin/activate
 pip install -r requirements.txt
+sudo apt-get install -y postgresql postgresql-contrib
+sudo usermod -a -G sudo postgres
+sudo -u postgres psql
+CREATE DATABASE freeopendata;
+CREATE USER freeopendata WITH PASSWORD '****changeme****';
+GRANT ALL PRIVILEGES ON DATABASE "freeopendata" to freeopendata;
 ```

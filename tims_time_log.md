@@ -1,6 +1,7 @@
 3/25/17
 
-* 4:32AM - : setting up the server, writing down instructions for setup
+* 6:20AM - : setting up postgresql, configuring the app, 
+* 4:32AM - 6:00AM: setting up the server, writing down instructions for setup
 
 3/24/17
 
@@ -14,7 +15,7 @@
 3/22/17
 
 * 5:00PM - 9:00PM: Open Seattle: talked with Socrata's Chris Metcalf and a person on the migrations team about how to improve the Socrata to BigQuery ETL.
-* 6:20AM - 6:30AM: comiting code pushing
+* 6:20AM - 6:30AM: committing code pushing
 * 5:00AM - 5:40AM: got database table creation working
 
 3/21/17
