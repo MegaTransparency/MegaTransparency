@@ -1,6 +1,7 @@
 3/23/17
 
-* 1:33PM - : https://github.com/wayeasycorp/FreeOpenData/issues/14
+* 5:03PM - : got uwsgi working manually `uwsgi --http-socket :9090 --wsgi-file wsgi.py --callable app`, remove javascript based https forcer, will force via nginx, so can use app in test mode, for upstart I had to install sudo apt-get install upstart-sysv, can't seem to get site served up via nginx, the info in /etc/init/freeopendata.conf was wrong
+* 1:33PM - 3:04PM: https://github.com/wayeasycorp/FreeOpenData/issues/14, https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-14-04, various static file changes, wasn't able to get uwsgi working on command line, stupid power/internet went out
 
 3/22/17
 
