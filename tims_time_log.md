@@ -1,6 +1,7 @@
 3/25/17
 
-* 6:20AM - : setting up postgresql, configuring the app, 
+* 8:16AM - : getting deployment going
+* 6:20AM - 8:00AM: setting up postgresql, configuring the app, trying get deployment going
 * 4:32AM - 6:00AM: setting up the server, writing down instructions for setup
 
 3/24/17

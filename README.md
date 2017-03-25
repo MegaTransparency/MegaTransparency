@@ -70,7 +70,7 @@ Initially we're focused on competeting with MuckRock and DataWorld because these
 
 ### Status
 
-Also see time log at https://github.com/wayeasycorp/FreeOpenData/blob/master/tims_time_log.md
+See time log at https://github.com/wayeasycorp/FreeOpenData/blob/master/tims_time_log.md
 
 * Recovering after server failed to boot
 * Currently copying Socrata's data catalog to BigQuery. https://bigquery.cloud.google.com/table/freeopendata-161213:copy_of_socrata_data.data_catalog
@@ -102,6 +102,7 @@ sudo sed -z 's/PermitRootLogin without-password\|$/PermitRootLogin no/' /etc/ssh
 sudo service ssh restart
 sudo apt-get update
 sudo apt-get install -y build-essential python-dev git-core python-pip virtualenv nginx
+sudo pip install virtualenv uwsgi
 git clone https://github.com/wayeasycorp/FreeOpenData.git
 cd FreeOpenData
 cp _config.py.example _config.py
@@ -128,4 +129,17 @@ uwsgi --socket 0.0.0.0:8000 --protocol=http -w wsgi --callable=app
 sudo cp etc_nginx_sites_available_freeopendata_com /etc/nginx/sites-available/freeopendata.com
 sudo ln -s /etc/nginx/sites-available/freeopendata.com /etc/nginx/sites-enabled/freeopendata.com
 sudo service nginx restart
+```
+Below is from https://github.com/mking/flask-uwsgi
+```
+# Create a directory for the UNIX sockets
+sudo mkdir /var/run/flask-uwsgi
+sudo chown www-data:www-data /var/run/flask-uwsgi
+
+# Create a directory for the logs
+sudo mkdir /var/log/flask-uwsgi
+sudo chown www-data:www-data /var/log/flask-uwsgi
+
+# Create a directory for the configs
+sudo mkdir /etc/flask-uwsgi
 ```
