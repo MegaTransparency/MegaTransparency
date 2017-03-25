@@ -103,5 +103,7 @@ sudo service ssh restart
 sudo apt-get update
 sudo apt-get install -y build-essential python-dev git-core python-pip virtualenv nginx
 git clone https://github.com/wayeasycorp/FreeOpenData.git
-sudo apt-get install -y nginx
+virtualenv env --distribute
+source venv/bin/activate
+pip install -r requirements.txt
 ```
