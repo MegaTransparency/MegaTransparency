@@ -1,3 +1,7 @@
+3/25/17
+
+* 4:32AM - : setting up the server, writing down instructions for setup
+
 3/24/17
 
 * 5:40PM - 6:00PM: working towards getting a new server going and get FOD deployed

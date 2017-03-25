@@ -70,6 +70,9 @@ Initially we're focused on competeting with MuckRock and DataWorld because these
 
 ### Status
 
+Also see time log at https://github.com/wayeasycorp/FreeOpenData/blob/master/tims_time_log.md
+
+* Recovering after server failed to boot
 * Currently copying Socrata's data catalog to BigQuery. https://bigquery.cloud.google.com/table/freeopendata-161213:copy_of_socrata_data.data_catalog
 * Writing script to copy to BigQuery and keep updated all Socrata datasets
 
@@ -80,3 +83,25 @@ Initially we're focused on competeting with MuckRock and DataWorld because these
 * Google G Suite https://gsuite.google.com/ for email and cheap storage http://www.techrepublic.com/article/how-to-mount-your-google-drive-on-linux-with-google-drive-ocamlfuse/
 * CloudFlare.com
 
+### Install
+
+This guide assumes you are using Ubuntu Xenial on Scaleway C2L.
+
+```
+adduser main
+usermod -aG sudo main
+echo "main ALL=(ALL) ALL" >> /etc/sudoers
+cp -R .ssh /home/main/.ssh
+chown main -R /home/main/.ssh
+chmod 700 /home/main/.ssh
+chmod 600 /home/main/.ssh/authorized_keys
+```
+Confirm can login as main. Then we disable ssh into root.
+```
+sudo sed -z 's/PermitRootLogin without-password\|$/PermitRootLogin no/' /etc/ssh/sshd_config | sudo dd of=/etc/ssh/sshd_config
+sudo service ssh restart
+sudo apt-get update
+sudo apt-get install -y build-essential python-dev git-core python-pip virtualenv nginx
+git clone https://github.com/wayeasycorp/FreeOpenData.git
+sudo apt-get install -y nginx
+```
