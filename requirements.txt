@@ -18,3 +18,4 @@ git+https://github.com/wayeasycorp/communityapis.git
 flask-cors
 flask-failsafe
 uwsgi
+Flask-Script
