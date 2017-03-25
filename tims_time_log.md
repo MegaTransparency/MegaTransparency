@@ -1,12 +1,16 @@
+3/24/17
+
+* 5:40PM - 6:00PM: working towards getting a new server going and get FOD deployed
+
 3/23/17
 
-* 5:03PM - : got uwsgi working manually `uwsgi --http-socket :9090 --wsgi-file wsgi.py --callable app`, remove javascript based https forcer, will force via nginx, so can use app in test mode, for upstart I had to install sudo apt-get install upstart-sysv, can't seem to get site served up via nginx, the info in /etc/init/freeopendata.conf was wrong
+* 5:03PM - 9:12PM: got uwsgi working manually `uwsgi --http-socket :9090 --wsgi-file wsgi.py --callable app`, remove javascript based https forcer, will force via nginx, so can use app in test mode, for upstart I had to install sudo apt-get install upstart-sysv, can't seem to get site served up via nginx, the info in /etc/init/freeopendata.conf was wrong, server refused to reboot, was unable to fix boot using rescue boot, was able to copy key files
 * 1:33PM - 3:04PM: https://github.com/wayeasycorp/FreeOpenData/issues/14, https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-14-04, various static file changes, wasn't able to get uwsgi working on command line, stupid power/internet went out
 
 3/22/17
 
 * 5:00PM - 9:00PM: Open Seattle: talked with Socrata's Chris Metcalf and a person on the migrations team about how to improve the Socrata to BigQuery ETL.
-* 6:20AM - 6:30AM: commiting code pushing
+* 6:20AM - 6:30AM: comiting code pushing
 * 5:00AM - 5:40AM: got database table creation working
 
 3/21/17
