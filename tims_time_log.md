@@ -1,6 +1,7 @@
 3/25/17
 
-* 8:16AM - : getting deployment going
+* 4:23PM - : working through http://serverfault.com/questions/775965/wiring-uwsgi-to-work-with-django-and-nginx-on-ubuntu-16-04
+* 8:16AM - 9:27AM: getting deployment going, really confused/stuck about how to deploy via uwsgi
 * 6:20AM - 8:00AM: setting up postgresql, configuring the app, trying get deployment going
 * 4:32AM - 6:00AM: setting up the server, writing down instructions for setup
 

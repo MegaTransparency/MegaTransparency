@@ -90,7 +90,7 @@ This guide assumes you are using Ubuntu Xenial on Scaleway C2L.
 ```
 adduser main
 usermod -aG sudo main
-echo "main ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+echo "main ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 cp -R .ssh /home/main/.ssh
 chown main -R /home/main/.ssh
 chmod 700 /home/main/.ssh
@@ -130,16 +130,10 @@ sudo cp etc_nginx_sites_available_freeopendata_com /etc/nginx/sites-available/fr
 sudo ln -s /etc/nginx/sites-available/freeopendata.com /etc/nginx/sites-enabled/freeopendata.com
 sudo service nginx restart
 ```
-Below is from https://github.com/mking/flask-uwsgi
+Below is from http://serverfault.com/questions/775965/wiring-uwsgi-to-work-with-django-and-nginx-on-ubuntu-16-04
 ```
-# Create a directory for the UNIX sockets
-sudo mkdir /var/run/flask-uwsgi
-sudo chown www-data:www-data /var/run/flask-uwsgi
-
-# Create a directory for the logs
-sudo mkdir /var/log/flask-uwsgi
-sudo chown www-data:www-data /var/log/flask-uwsgi
-
-# Create a directory for the configs
-sudo mkdir /etc/flask-uwsgi
+sudo mkdir /etc/uwsgi/
+sudo mkdir /etc/uwsgi/sites
+sudo cp freeopendata.ini /etc/uwsgi/sites/freeopendata.ini
+sudo cp uwsgi.service /etc/systemd/system/uwsgi.service
 ```
