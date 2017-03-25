@@ -113,4 +113,6 @@ sudo -u postgres psql
 CREATE DATABASE freeopendata;
 CREATE USER freeopendata WITH PASSWORD '****changeme****';
 GRANT ALL PRIVILEGES ON DATABASE "freeopendata" to freeopendata;
+\connect freeopendata
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 ```
