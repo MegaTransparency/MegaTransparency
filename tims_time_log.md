@@ -1,6 +1,6 @@
 3/25/17
 
-* 5:36PM - : enabling Google login
+* 5:36PM - 6:00PM: enabling Google login
 * 4:23PM - 5:36PM: working through http://serverfault.com/questions/775965/wiring-uwsgi-to-work-with-django-and-nginx-on-ubuntu-16-04
 * 8:16AM - 9:27AM: getting deployment going, really confused/stuck about how to deploy via uwsgi
 * 6:20AM - 8:00AM: setting up postgresql, configuring the app, trying get deployment going
