@@ -1,6 +1,6 @@
 import urllib
 import os
-import uuid
+import uuuid
 import requests
 import stripe
 import json
@@ -44,14 +44,14 @@ stripe.api_key = stripe_keys['secret_key']
 REDIRECT_URI = 'https://devapi.wayeasycorp.com/oauth/google'
 
 def get_user(request):
-    session_uid = session.get('session_uid') if session.get('session_uid') else request.args.get('session_uid')
-    print session_uid
-    if not session_uid:
+    session_uuid = session.get('session_uuid') if session.get('session_uuid') else request.args.get('session_uuid')
+    print session_uuid
+    if not session_uuid:
         return None
-    q = db.session.query(models.Session).filter(models.Session.uid == session_uid)
+    q = db.session.query(models.Session).filter(models.Session.uuid == session_uuid)
     if q.first():
         if q.first().active:
-            return db.session.query(models.User).filter(models.User.user_id == q.first().user_id).first()
+            return db.session.query(models.User).filter(models.User.user_uuuid == q.first().user_uuuid).first()
         else:
             return None
     else:
@@ -66,7 +66,7 @@ def set_session():
     if session.get('oauth_id'):
         session['oauth_id'] = session['oauth_id'].strip()
     access_token = session.get('access_token')
-    session_uid = session.get('session_uid')
+    session_uuid = session.get('session_uuid')
     if access_token is None:
         return redirect(url_for('login'))
  
@@ -97,7 +97,7 @@ def set_session():
         db.session.add(new_user)
         db.session.commit()
         new_oauth = models.Oauth(
-            user_id = new_user.user_id,
+            user_uuuid = new_user.user_uuuid,
             provider = 'google',
             access_token = access_token,
             oauth_id = oauth_data['id'],
@@ -109,7 +109,7 @@ def set_session():
     oauth_in_db.data = oauth_data
     oauth_in_db.access_token = access_token
     db.session.commit()
-    user_in_db = db.session.query(models.User).filter(models.User.user_id == oauth_in_db.user_id).first()
+    user_in_db = db.session.query(models.User).filter(models.User.user_uuuid == oauth_in_db.user_uuuid).first()
     if  user_in_db.data:
         d = oauth_data
         user_in_db.data.update(d)
@@ -117,18 +117,18 @@ def set_session():
         d = oauth_data
         user_in_db.data = d
     db.session.commit()
-    user_id = db.session.query(models.Oauth).filter(models.Oauth.oauth_id == session.get('oauth_id')).first().user_id
-    q = db.session.query(models.Session).filter(models.Session.uid == session.get('session_uid'))
-    if session_uid is None:
-        session_uid = str(uuid.uuid4())
+    user_uuuid = db.session.query(models.Oauth).filter(models.Oauth.oauth_id == session.get('oauth_id')).first().user_uuuid
+    q = db.session.query(models.Session).filter(models.Session.uuid == session.get('session_uuid'))
+    if session_uuid is None:
+        session_uuid = str(uuuid.uuuid4())
         new_session = models.Session(
-            uid = session_uid,
-            user_id = user_id,
+            uuid = session_uuid,
+            user_uuuid = user_uuuid,
             active = True
         )
         db.session.add(new_session)
         db.session.commit()
-        session['session_uid'] = new_session.uid
+        session['session_uuid'] = new_session.uuid
         session_in_db = q.first()
     else:
         session_in_db = q.first()
@@ -145,7 +145,7 @@ def set_session():
     next = request.args.get('next', '/')
     if next.startswith('https://'):
         import urllib
-        next = next + '?' + urllib.urlencode({'access_token': access_token, 'session_uid': session_uid})
+        next = next + '?' + urllib.urlencode({'access_token': access_token, 'session_uuid': session_uuid})
     return redirect(next)
  
 
@@ -189,7 +189,7 @@ def get_access_token():
 @app.route('/logout')
 def logout():
     try:
-        q = db.session.query(models.Session).filter(models.Session.uid == session.get('session_uid'))
+        q = db.session.query(models.Session).filter(models.Session.uuid == session.get('session_uuid'))
         session_in_db = q.first()
         session_in_db.active = False
         db.session.commit()
