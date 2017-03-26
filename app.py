@@ -231,20 +231,17 @@ def update_page_view():
         if key in ['mouse_locations', 'scrolls', 'resolution_x', 'resolution_y']:
             cleaned_data[key] = data[key]
     page_view_in_db = db.session.query(models.PageViews).filter(models.PageViews.uuid == uuid).first()
+    print 'page view in db', page_view_in_db
     if page_view_in_db:
-        print 'yes page view is in db'
-        print page_view_in_db.data.keys()
+        # for whatever reason modifying page_view_in_db.data then doing db.session.commit() didn't update the page_view row
         page_view_in_db.data.update(cleaned_data)
-        print page_view_in_db.data.keys()
-        print 'dirty', db.session.dirty
         db.session.query(models.PageViews).filter(models.PageViews.uuid == uuid).update(dict(data=page_view_in_db.data))
         try:
             db.session.commit()
         except Exception, e:
             traceback.print_exc(file=sys.stdout)
-            db_session.rollback()
-            db_session.flush()
-        print 'DATA AFTER COMMIT', db.session.query(models.PageViews).filter(models.PageViews.uuid == uuid).first().data.keys()
+            db.session.rollback()
+            db.session.flush()
     return flask.jsonify(success=True)
 
 @app.route('/api/server_time', strict_slashes=False)
