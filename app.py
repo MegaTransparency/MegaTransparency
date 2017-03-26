@@ -242,6 +242,7 @@ def update_page_view():
         print new_data
         page_view_in_db.data = new_data
         db.session.commit()
+        print 'DATA AFTER COMMIT', db.session.query(models.PageViews).filter(models.PageViews.uuid == uuid).first().data.keys()
     return flask.jsonify(success=True)
 
 @app.route('/api/server_time', strict_slashes=False)
