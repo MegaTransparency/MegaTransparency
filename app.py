@@ -242,6 +242,7 @@ def update_page_view():
         print new_data
         page_view_in_db.data = new_data
         try:
+            db.session.merge(page_view_in_db)
             db.session.commit()
         except Exception, e:
             traceback.print_exc(file=sys.stdout)
