@@ -170,7 +170,7 @@ def login():
  
  
  
-@app.route('/oauth/google')
+@app.route('/oauth/google', strict_slashes=False)
 @google.authorized_handler
 def authorized(resp):
     access_token = resp['access_token']
