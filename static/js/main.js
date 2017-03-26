@@ -1,5 +1,5 @@
 $(function() {
-    $(window).unload(function(){
+    $(window).on("unload", function(e) {
         console.log('leaving');
         $.ajax({
             type: 'POST',
