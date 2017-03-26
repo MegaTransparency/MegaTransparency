@@ -8,7 +8,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.16.0/polyfill.min.js"></script>
         <meta name="mobile-web-app-capable" content="yes">
         <script>
-            var page_view_uuid = {{ page_view_uuid }};
+            var page_view_uuid = "{{ page_view_uuid }}";
             if (!window.console) window.console = {};
             if (!window.console.log) window.console.log = function () { };
             if (location.href.indexOf('hard_reload') > -1 ) {
