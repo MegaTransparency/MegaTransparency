@@ -237,6 +237,7 @@ def update_page_view():
         current_page_view_data = page_view_in_db.data
         new_data = current_page_view_data
         new_data.update(cleaned_data)
+        page_view_in_db.data = new_data
         db.session.commit()
     return flask.jsonify(success=True)
 
