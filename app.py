@@ -41,7 +41,7 @@ stripe_keys = {
 
 stripe.api_key = stripe_keys['secret_key']
 
-REDIRECT_URI = 'https://devapi.wayeasycorp.com/api/oauth/google'
+REDIRECT_URI = 'https://devapi.wayeasycorp.com/oauth/google'
 
 def get_user(request):
     session_uid = session.get('session_uid') if session.get('session_uid') else request.args.get('session_uid')
@@ -170,7 +170,7 @@ def login():
  
  
  
-@app.route('/api/oauth/google')
+@app.route('/oauth/google')
 @google.authorized_handler
 def authorized(resp):
     access_token = resp['access_token']
