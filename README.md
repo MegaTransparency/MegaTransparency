@@ -138,3 +138,11 @@ sudo mkdir /etc/uwsgi/sites
 sudo cp freeopendata.ini /etc/uwsgi/sites/freeopendata.ini
 sudo cp uwsgi.service /etc/systemd/system/uwsgi.service
 ```
+
+### Deployment
+
+Currently am running this by hand each time I want to deploy latest code
+```
+cd ~/FreeOpenData; source env/bin/activate; git pull; python manage.py db upgrade; sudo systemctl restart uwsgi
+```
+
