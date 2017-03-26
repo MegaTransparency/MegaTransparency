@@ -11,6 +11,7 @@ from flask_socketio import SocketIO
 from flask_failsafe import failsafe
 import calendar
 import time
+import jinja2
 app = Flask(__name__)
 app.jinja_loader = jinja2.FileSystemLoader(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates'))
 socketio = SocketIO(app)
