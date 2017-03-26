@@ -1,3 +1,7 @@
+3/26/17
+
+* 8:15AM - 8:30AM: writing up https://github.com/wayeasycorp/FreeOpenData/issues/17
+
 3/25/17
 
 * 5:36PM - 6:00PM: enabling Google login
