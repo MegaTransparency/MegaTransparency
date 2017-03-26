@@ -235,9 +235,9 @@ def update_page_view():
     print 'page view updating'
     if page_view_in_db:
         print 'yes page view is in db'
-        print page_view_in_db.keys()
+        print page_view_in_db.data.keys()
         page_view_in_db.data.update(cleaned_data)
-        print page_view_in_db.keys()
+        print page_view_in_db.data.keys()
         print 'dirty', db.session.dirty
         try:
             db.session.commit()
