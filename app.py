@@ -226,7 +226,7 @@ def update_page_view():
     time_left = calendar.timegm(time.gmtime())*1000
     uuid = request.form['uuid']
     data = json.loads(request.form['data'])
-    cleaned_data = {}
+    cleaned_data = {"time_left": time_left}
     for key in data:
         if key in ['mouse_locations', 'scrolls', 'resolution_x', 'resolution_y']:
             cleaned_data[key] = data[key]
