@@ -241,7 +241,12 @@ def update_page_view():
         new_data.update(cleaned_data)
         print new_data
         page_view_in_db.data = new_data
-        db.session.commit()
+        try:
+            db.session.commit()
+        except Exception, e:
+            traceback.print_exc(file=sys.stdout)
+            db_session.rollback()
+            db_session.flush()
         print 'DATA AFTER COMMIT', db.session.query(models.PageViews).filter(models.PageViews.uuid == uuid).first().data.keys()
     return flask.jsonify(success=True)
 
