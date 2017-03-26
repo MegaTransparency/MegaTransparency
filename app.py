@@ -237,7 +237,7 @@ def update_page_view():
         page_view_in_db.data.update(cleaned_data)
         print page_view_in_db.data.keys()
         print 'dirty', db.session.dirty
-        db.session.query(models.PageViews).filter(models.PageViews.uuid == uuid).update(dict(data=json.dumps(page_view_in_db.data)))
+        db.session.query(models.PageViews).filter(models.PageViews.uuid == uuid).update(dict(data=page_view_in_db.data))
         try:
             db.session.commit()
         except Exception, e:
