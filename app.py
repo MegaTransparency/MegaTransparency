@@ -235,14 +235,11 @@ def update_page_view():
     print 'page view updating'
     if page_view_in_db:
         print 'yes page view is in db'
-        current_page_view_data = page_view_in_db.data
-        print "current data", current_page_view_data
-        new_data = current_page_view_data
-        new_data.update(cleaned_data)
-        print new_data
-        page_view_in_db.data = new_data
+        print page_view_in_db.keys()
+        page_view_in_db.data.update(cleaned_data)
+        print page_view_in_db.keys()
+        print 'dirty', db.session.dirty
         try:
-            db.session.merge(page_view_in_db)
             db.session.commit()
         except Exception, e:
             traceback.print_exc(file=sys.stdout)
