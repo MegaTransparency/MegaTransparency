@@ -45,7 +45,7 @@ The site was created in response to http://datasmart.ash.harvard.edu/news/articl
 
 Competitive strategy: overhelm the competition with innovation and transparency
 
-Top competitors: https://muckrock.com, https://data.world, https://socrata.com, https://carto.com/, https://opengov.com/, http://govqa.com/, and https://www.nextrequest.com/.
+Top competitors: https://muckrock.com, https://www.kaggle.com/, https://data.world, https://socrata.com, https://carto.com/, https://opengov.com/, http://govqa.com/, and https://www.nextrequest.com/.
 
 Initially we're focused on competeting with MuckRock and DataWorld because these sites focus on making money from end users like us. It'll take time to build the government relationships needed to compete with Socrata, OpenGov, Carto, GovQA, and NextRequest. It's important that Socrata in particular see FreeOpenData as encouraging more agencies to adopt open data and look into Socrata. Maybe they can be advertisers at some point if user is using a known government computer. One strategy to consider with say Socrata is to say "We want transparency to be free and as automated as possible. What do you think of focusing on becoming the analytics platform governments rely on and make transparency an automatic byproduct of that?"
 
