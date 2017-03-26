@@ -228,7 +228,7 @@ def update_page_view():
     data = json.loads(request.form['data'])
     cleaned_data = {"time_left": time_left}
     for key in data:
-        if key in ['mouse_locations', 'scrolls', 'resolution_x', 'resolution_y']:
+        if key in ['mouse_locations', 'scrolls', 'screen_width', 'screen_height']:
             cleaned_data[key] = data[key]
     page_view_in_db = db.session.query(models.PageViews).filter(models.PageViews.uuid == uuid).first()
     print 'page view in db', page_view_in_db
