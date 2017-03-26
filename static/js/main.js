@@ -10,7 +10,7 @@ $(function() {
             type: 'POST',
             url: '/api/update_page_view',
             async: false,
-            data: {uuid:page_view_uuid, data: data}
+            data: {uuid:page_view_uuid, data: JSON.stringify(data)}
         });
     });
     $(document).mousemove(function(event) {
