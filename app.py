@@ -203,7 +203,7 @@ def logout():
 
 @app.errorhandler(404) # We always return index.html if route not found because we use Vue.JS routing
 def page_not_found(e):
-    data = {"ip_address": request.environ['REMOTE_ADDR']}
+    data = {"ip_address": request.headers.get('X-Forwarded-For', request.remote_addr)}
     new_page_view = models.PageViews(
         data = data
     )
