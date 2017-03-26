@@ -1,6 +1,6 @@
 import urllib
 import os
-import uuuid
+import uuid
 import requests
 import stripe
 import json
@@ -48,10 +48,10 @@ def get_user(request):
     print session_uuid
     if not session_uuid:
         return None
-    q = db.session.query(models.Session).filter(models.Session.uuid == session_uuid)
+    q = db.session.query(models.Session).filter(models.Session.uid == session_uuid)
     if q.first():
         if q.first().active:
-            return db.session.query(models.User).filter(models.User.user_uuuid == q.first().user_uuuid).first()
+            return db.session.query(models.User).filter(models.User.user_uuid == q.first().user_uuid).first()
         else:
             return None
     else:
@@ -97,7 +97,7 @@ def set_session():
         db.session.add(new_user)
         db.session.commit()
         new_oauth = models.Oauth(
-            user_uuuid = new_user.user_uuuid,
+            user_uuid = new_user.user_uuid,
             provider = 'google',
             access_token = access_token,
             oauth_id = oauth_data['id'],
@@ -109,7 +109,7 @@ def set_session():
     oauth_in_db.data = oauth_data
     oauth_in_db.access_token = access_token
     db.session.commit()
-    user_in_db = db.session.query(models.User).filter(models.User.user_uuuid == oauth_in_db.user_uuuid).first()
+    user_in_db = db.session.query(models.User).filter(models.User.user_uuid == oauth_in_db.user_uuid).first()
     if  user_in_db.data:
         d = oauth_data
         user_in_db.data.update(d)
@@ -117,18 +117,18 @@ def set_session():
         d = oauth_data
         user_in_db.data = d
     db.session.commit()
-    user_uuuid = db.session.query(models.Oauth).filter(models.Oauth.oauth_id == session.get('oauth_id')).first().user_uuuid
-    q = db.session.query(models.Session).filter(models.Session.uuid == session.get('session_uuid'))
+    user_uuid = db.session.query(models.Oauth).filter(models.Oauth.oauth_id == session.get('oauth_id')).first().user_uuid
+    q = db.session.query(models.Session).filter(models.Session.uid == session.get('session_uuid'))
     if session_uuid is None:
-        session_uuid = str(uuuid.uuuid4())
+        session_uuid = str(uuid.uuid4())
         new_session = models.Session(
-            uuid = session_uuid,
-            user_uuuid = user_uuuid,
+            uid = session_uuid,
+            user_uuid = user_uuid,
             active = True
         )
         db.session.add(new_session)
         db.session.commit()
-        session['session_uuid'] = new_session.uuid
+        session['session_uuid'] = new_session.uid
         session_in_db = q.first()
     else:
         session_in_db = q.first()
@@ -189,7 +189,7 @@ def get_access_token():
 @app.route('/logout')
 def logout():
     try:
-        q = db.session.query(models.Session).filter(models.Session.uuid == session.get('session_uuid'))
+        q = db.session.query(models.Session).filter(models.Session.uid == session.get('session_uuid'))
         session_in_db = q.first()
         session_in_db.active = False
         db.session.commit()
