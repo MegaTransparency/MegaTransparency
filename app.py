@@ -231,12 +231,15 @@ def update_page_view():
         if key in ['mouse_locations', 'scrolls', 'resolution_x', 'resolution_y']:
             cleaned_data[key] = data[key]
     page_view_in_db = db.session.query(models.PageViews).filter(models.PageViews.uuid == uuid).first()
+    print page_view_in_db
     print 'page view updating'
     if page_view_in_db:
         print 'yes page view is in db'
         current_page_view_data = page_view_in_db.data
+        print "current data", current_page_view_data
         new_data = current_page_view_data
         new_data.update(cleaned_data)
+        print new_data
         page_view_in_db.data = new_data
         db.session.commit()
     return flask.jsonify(success=True)
