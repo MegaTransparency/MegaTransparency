@@ -6,6 +6,7 @@ $(function() {
         data["screen_width"] = screen.width;
         data["screen_height"] = screen.height;
         data["mouse_locations"] = window.mouse_locations;
+        console.log(JSON.stringify(data));
         $.ajax({
             type: 'POST',
             url: '/api/update_page_view',
