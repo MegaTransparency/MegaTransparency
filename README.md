@@ -103,6 +103,7 @@ sudo service ssh restart
 sudo apt-get update
 sudo apt-get install -y build-essential python-dev git-core python-pip virtualenv nginx
 sudo pip install virtualenv uwsgi
+sudo apt-get install uwsgi
 git clone https://github.com/wayeasycorp/FreeOpenData.git
 cd FreeOpenData
 cp _config.py.example _config.py
