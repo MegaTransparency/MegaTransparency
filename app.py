@@ -207,7 +207,7 @@ def page_not_found(e):
     data['url'] = request.url
     data['time_arrived'] = calendar.timegm(time.gmtime())*1000
     data['referrer'] = request.referrer
-    user_agent = request.headers.get('User-Agent', {})
+    user_agent = request.user_agent
     for key in user_agent:
         data['user_agent_'+key] = user_agent[key]
     new_page_view = models.PageViews(
