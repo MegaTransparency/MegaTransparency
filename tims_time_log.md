@@ -1,5 +1,6 @@
 3/26/17
 
+* 10:00AM - : "Implement public activity log" https://github.com/wayeasycorp/FreeOpenData/issues/17, setting up postgresql on my sagemathcloud project so I can do python2 manage.py migrate see https://github.com/sagemathinc/smc/wiki/Using-PostgreSQL-in-SageMathCloud 
 * 8:15AM - 8:30AM: writing up https://github.com/wayeasycorp/FreeOpenData/issues/17
 
 3/25/17
