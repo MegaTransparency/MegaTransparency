@@ -1,0 +1,59 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/static/img/favicon.ico" type="image/x-icon">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.16.0/polyfill.min.js"></script>
+        <meta name="mobile-web-app-capable" content="yes">
+        <script>
+            var page_view_uuid = {{ page_view_uuid }};
+            if (!window.console) window.console = {};
+            if (!window.console.log) window.console.log = function () { };
+            if (location.href.indexOf('hard_reload') > -1 ) {
+                if (typeof(Storage) !== "undefined") {
+                    if (localStorage.reload) {
+                        localStorage.reload = undefined;
+                        location = '/'
+                    } else {
+                        localStorage.reload = true;
+                        location.reload(true);
+                    }
+                } else {
+                    // Sorry! No Web Storage support..
+                }
+                //location.reload(true);
+            }
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+        <meta name="generator" content=
+            "HTML Tidy for Linux (vers 25 March 2009), see www.w3.org" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content=
+            "width=device-width, initial-scale=1" />
+        <title>FreeOpenData.com: Championing transparency as the default</title>
+        <link href="https://fonts.googleapis.com/css?family=Lora|Roboto" rel="stylesheet">
+        <script type="text/javascript" src=
+            "https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.min.js">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.0.1/vue-router.min.js">
+        </script>
+        <link href="/static/css/main.css" rel="stylesheet" type=
+            "text/css" />
+        <script src=
+            "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"
+            type="text/javascript"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous" type="text/javascript"></script>
+    </head>
+    <body>
+        <h1>Site not launched. Nothing working yet. See details at <a href="https://github.com/wayeasycorp/FreeOpenData">Github repo</a>.</h1>
+        <div id="notice_about_free_use"><strong>Important privacy notice:</strong> As a free user <a href="/public_activity_log/">you don't have privacy</a> on FreeOpenData.com. Private use of the site and double reputation points costs $19.99/month. You have thirty minutes to get a subscription before your activity becomes public. <a href="/subscribe/">Get your subscription today.</a> The rationale for this privacy policy is to make open data freely available while having a revenue model and promoting transparency around the use of open data.</div>
+        <div id="header"><h1><span class="free">Free</span>OpenData.com: Championing transparency as the default</h1></div>
+        
+        <div id="main"><div id="intro"><p>At FreeOpenData the mission is to make it completely free and easy for government agencies to be transparent by default. To do this we want to make all transparency laws black and white and do a private sector take over of disclosing government records. To pay for this we aim to make the most popular open data site where we will make money from subscriptions, consulting, sponsorships, job boards, and training. To be clear we want government data to be freely accessible from many sources not just ours.</p> <p>To our data portal competitors <a href="https://socrata.com/">Socrata</a> and <a href="https://opengov.com/">OpenGov</a> we thank you for your commitment to open APIs. We encourage you to make software government employees depend on operationally so you're in a position to make open data an automatic byproduct.</p></div></div>
+    </body>
+</html>

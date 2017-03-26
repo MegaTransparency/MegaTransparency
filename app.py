@@ -12,6 +12,7 @@ from flask_failsafe import failsafe
 import calendar
 import time
 app = Flask(__name__)
+app.jinja_loader = jinja2.FileSystemLoader(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates'))
 socketio = SocketIO(app)
 from threading import Thread
 thread = None
@@ -203,6 +204,7 @@ def logout():
 
 @app.errorhandler(404) # We always return index.html if route not found because we use Vue.JS routing
 def page_not_found(e):
+    
     data = {"ip_address": request.headers.get('X-Forwarded-For', request.remote_addr)}
     data['url'] = request.url
     data['time_arrived'] = calendar.timegm(time.gmtime())*1000
@@ -215,7 +217,24 @@ def page_not_found(e):
     )
     db.session.add(new_page_view)
     db.session.commit()
-    return app.send_static_file('index.html'), 200
+    print "new page uuid",  new_page_view.uuid
+    return render_template('index.html', page_view_uuid=new_page_view.uuid)
+
+@app.route('/api/update_page_view', strict_slashes=False, methods=['POST'])
+def update_page_view():
+    time_left = calendar.timegm(time.gmtime())*1000
+    uuid = request.form['uuid']
+    data = json.loads(request.form['data'])
+    cleaned_data = {}
+    for key in data:
+        if key in ['mouse_locations', 'scrolls', 'resolution_x', 'resolution_y']:
+            cleaned_data[key] = data[key]
+    page_view_in_db = db.session.query(models.PageViews).filter(models.PageViews.uuid == uuid).first()
+    if page_view_in_db:
+        current_page_view_data = page_view_in_db.data
+        new_data = current_page_view_data
+        new_data.update(cleaned_data)
+        db.session.commit()
 
 @app.route('/api/server_time', strict_slashes=False)
 def server_time():
