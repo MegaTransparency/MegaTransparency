@@ -1,6 +1,7 @@
 3/26/17
 
-* 12:16PM - : Write some javascript to update pageview data with time left, mouse locations, resolution, and scrolls,
+
+* 12:16PM - 2:00PM: Write some javascript to update pageview data with time left, mouse locations, and resolution
 * 10:00AM - 11:50AM: "Implement public activity log" https://github.com/wayeasycorp/FreeOpenData/issues/17, setting up postgresql on my sagemathcloud project so I can do python2 manage.py migrate see https://github.com/sagemathinc/smc/wiki/Using-PostgreSQL-in-SageMathCloud 
 * 8:15AM - 8:30AM: writing up https://github.com/wayeasycorp/FreeOpenData/issues/17
 

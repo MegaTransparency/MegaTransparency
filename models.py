@@ -35,7 +35,7 @@ class Session(db.Model):
     public_uuid = Column(UUID(as_uuid=True),
         server_default=sqlalchemy.text("uuid_generate_v4()")) # we have a public UUID because we have a public log
     created = db.Column(db.DateTime, default=datetime.datetime.utcnow, nullable=False)
-    user_uuid = Column(UUID(as_uuid=True), db.ForeignKey("users.user_uuid"), nullable=False)
+    user_uuid = Column(UUID(as_uuid=True), db.ForeignKey("users.user_uuid"), nullable=True)
     active = db.Column(db.Boolean, default=True, nullable=False)
     data = db.Column(postgresql.JSONB, nullable=True)
 
