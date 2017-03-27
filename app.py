@@ -122,15 +122,13 @@ def set_session():
     user_uuid = db.session.query(models.Oauth).filter(models.Oauth.oauth_id == session.get('oauth_id')).first().user_uuid
     q = db.session.query(models.Session).filter(models.Session.uuid == session.get('session_uuid'))
     if session_uuid is None:
-        session_uuid = str(uuid.uuid4())
         new_session = models.Session(
-            uuid = session_uuid,
             user_uuid = user_uuid,
             active = True
         )
         db.session.add(new_session)
         db.session.commit()
-        session['session_uuid'] = new_session.uuid
+        session['session_uuid'] = new_session.secret_uuid
         session_in_db = q.first()
     else:
         session_in_db = q.first()
