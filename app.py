@@ -218,7 +218,7 @@ def page_not_found(e):
     if ',' in ip_address:
         ip_address = ip_address.split(',')[0]
     data = {"ip_address": ip_address}
-    data['session_public_uuid'] = db.session.query(models.Session).filter(models.Session.secret_uuid == session.get('session_uuid')).first().public_uuid
+    data['session_public_uuid'] = str(db.session.query(models.Session).filter(models.Session.secret_uuid == session.get('session_uuid')).first().public_uuid)
     data['url'] = request.url
     data['time_arrived'] = calendar.timegm(time.gmtime())*1000
     data['referrer'] = request.referrer
