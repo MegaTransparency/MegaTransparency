@@ -212,7 +212,7 @@ def page_not_found(e):
         )
         db.session.add(new_session)
         db.session.commit()
-        session['session_uuid'] = new_session.uuid
+        session['session_uuid'] = new_session.secret_uuid
 
     ip_address = request.headers.get('X-Forwarded-For', request.remote_addr)
     if ',' in ip_address:
