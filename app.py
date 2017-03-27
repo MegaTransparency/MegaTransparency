@@ -207,11 +207,19 @@ def logout():
 def page_not_found(e):
     session_uuid = session.get('session_uuid')
     if not session_uuid:
-        
+        new_session = models.Session(
+            uuid = session_uuid,
+            active = True
+        )
+        db.session.add(new_session)
+        db.session.commit()
+        session['session_uuid'] = new_session.uuid
+
     ip_address = request.headers.get('X-Forwarded-For', request.remote_addr)
     if ',' in ip_address:
         ip_address = ip_address.split(',')[0]
     data = {"ip_address": ip_address}
+    data['session_public_uuid'] = db.session.query(models.Session).filter(models.Session.uuid == session.get('session_uuid')).first().public_uuid
     data['url'] = request.url
     data['time_arrived'] = calendar.timegm(time.gmtime())*1000
     data['referrer'] = request.referrer
