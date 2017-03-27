@@ -208,7 +208,6 @@ def page_not_found(e):
     session_uuid = session.get('session_uuid')
     if not session_uuid:
         new_session = models.Session(
-            uuid = session_uuid,
             active = True
         )
         db.session.add(new_session)
