@@ -1,5 +1,6 @@
 3/27/17
 
+* 8:48PM - 9:17PM: came up with this query to get the first time arrived for each session uuid SELECT 'session_public_uuid' AS what_uuid, session_public_uuid, min(time_arrived) AS first_time_arrived FROM (SELECT data->>'session_public_uuid' AS session_public_uuid, data->>'time_arrived' AS time_arrived FROM page_views) AS pv WHERE session_public_uuid IS NOT NULL GROUP BY session_public_uuid;
 * 8:34PM - 8:48PM: more fixes to session code, filed a request to Seattle Police for RMS operational status and case access audit trail
 * 7:10AM - 7:46AM: for the 30 minute privacy grace period start looking into adding user_uuid to all page view rows with current session public uuid, file request to Seattle Police for customized access fee to get audit trail data for body cams
 * 12:00AM - 12:38AM: working on 30 minute privacy grace period
