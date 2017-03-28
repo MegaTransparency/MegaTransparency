@@ -1,0 +1,8 @@
+WITH first_time_arrives AS (
+         SELECT 'session_public_uuid' AS what_uuid, session_public_uuid AS uuid, min(time_arrived) AS first_time_arrived
+         FROM (SELECT data->>'session_public_uuid' AS session_public_uuid, data->>'time_arrived' AS time_arrived FROM page_views) AS pv WHERE session_public_uuid IS NOT NULL GROUP BY session_public_uuid 
+         UNION SELECT 'user_uuid' AS what_uuid, user_uuid AS uuid, min(time_arrived) AS first_time_arrived FROM (SELECT data->>'user_uuid' AS user_uuid, data->>'time_arrived' AS time_arrived FROM page_views) AS pv WHERE user_uuid IS NOT NULL GROUP BY user_uuid
+     )
+SELECT uuid, data->>'user_uuid' AS user_uuid, data->>'ip_address' AS ip_address, data->>'time_arrived' AS time_arrived, data->>'url' AS url, data->>'session_public_uuid' AS session_public_uuid, data->>'referrer' AS referrer, data->>'time_left' AS time_left FROM page_views
+     WHERE data->>'time_arrived' IS NOT NULL AND data->>'time_left' IS NOT NULL AND (date_part('epoch',now())*1000 > (SELECT first_time_arrived::bigint + 60*30*1000 FROM first_time_arrives WHERE what_uuid = 'session_public_uuid' AND uuid = data->>'session_public_uuid') OR (date_part('epoch',now())*1000 > (SELECT first_time_arrived::bigint + 60*30*1000 FROM first_time_arrives WHERE what_uuid = 'user_uuid' AND uuid = data->>'user_uuid') AND data->>'user_uuid' IS NOT NULL))
+     ORDER BY data->>'time_arrived' DESC;
