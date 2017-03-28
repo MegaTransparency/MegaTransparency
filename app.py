@@ -210,7 +210,6 @@ def page_not_found(e):
         db.session.add(new_session)
         db.session.commit()
         session['session_uuid'] = new_session.secret_uuid
-
     ip_address = request.headers.get('X-Forwarded-For', request.remote_addr)
     if ',' in ip_address:
         ip_address = ip_address.split(',')[0]
@@ -221,6 +220,9 @@ def page_not_found(e):
     data['url'] = request.url
     data['time_arrived'] = calendar.timegm(time.gmtime())*1000
     data['referrer'] = request.referrer
+    print 'SESSION DATA', session_data.user_uuid
+    if session_data.user_uuid:
+        data['user_uuid'] = str(session_data.user_uuid)
     user_agent = request.user_agent
     for key in ['platform', 'browser', 'version', 'language', 'string']:
         data['user_agent_'+key] = getattr(user_agent, key)
