@@ -231,6 +231,7 @@ def page_not_found(e):
     )
     db.session.add(new_page_view)
     db.session.commit()
+    print db.session.query(models.PageViews).filter(models.PageViews.uuid == new_page_view.uuid).first().data
     print "new page uuid",  new_page_view.uuid
     return render_template('index.html', page_view_uuid=new_page_view.uuid)
 
