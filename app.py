@@ -17,7 +17,7 @@ app.jinja_loader = jinja2.FileSystemLoader(os.path.join(os.path.dirname(os.path.
 socketio = SocketIO(app)
 from threading import Thread
 thread = None
-from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy.dialects.postgresql import JSONB, JSON
 from sqlalchemy.sql.expression import cast, func
 
 app.config.from_pyfile('_config.py')
@@ -215,8 +215,6 @@ def page_not_found(e):
         ip_address = ip_address.split(',')[0]
     data = {"ip_address": ip_address}
     session_data = db.session.query(models.Session).filter(models.Session.secret_uuid == session.get('session_uuid')).first()
-    db.session.query(models.PageViews).filter(models.PageViews.data['session_public_uuid'] == str(session_data.public_uuid)).update({data: cast(
-        cast(models.PageViews.data, JSONB).concat(func.jsonb_build_object('user_uuid', str(session_data.user_uuid))), JSONB)}, synchronize_session="fetch")
     data['session_public_uuid'] = str(session_data.public_uuid)
     data['is_logged_in'] = session_data.active
     data['url'] = request.url
@@ -225,6 +223,8 @@ def page_not_found(e):
     print 'SESSION DATA', session_data.user_uuid
     if session_data.user_uuid:
         data['user_uuid'] = str(session_data.user_uuid)
+        db.session.query(models.PageViews).filter(models.PageViews.data['session_public_uuid'] == str(session_data.public_uuid)).update({data: cast(cast(models.PageViews.data, JSONB)
+                       .concat(func.jsonb_build_object('user_uuid', str(session_data.user_uuid))), JSON})
     user_agent = request.user_agent
     for key in ['platform', 'browser', 'version', 'language', 'string']:
         data['user_agent_'+key] = getattr(user_agent, key)
