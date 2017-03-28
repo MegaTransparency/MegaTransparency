@@ -120,7 +120,7 @@ def set_session():
         user_in_db.data = d
     db.session.commit()
     user_uuid = db.session.query(models.Oauth).filter(models.Oauth.oauth_id == session.get('oauth_id')).first().user_uuid
-    q = db.session.query(models.Session).filter(models.Session.uuid == session.get('session_uuid'))
+    q = db.session.query(models.Session).filter(models.Session.secret_uuid == session.get('session_uuid'))
     if session_uuid is None:
         new_session = models.Session(
             user_uuid = user_uuid,
@@ -188,7 +188,7 @@ def get_access_token():
 @app.route('/logout')
 def logout():
     try:
-        q = db.session.query(models.Session).filter(models.Session.uuid == session.get('session_uuid'))
+        q = db.session.query(models.Session).filter(models.Session.secret_uuid == session.get('session_uuid'))
         session_in_db = q.first()
         session_in_db.active = False
         db.session.commit()
