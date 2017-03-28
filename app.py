@@ -50,7 +50,7 @@ def get_user(request):
     print session_uuid
     if not session_uuid:
         return None
-    q = db.session.query(models.Session).filter(models.Session.uid == session_uuid)
+    q = db.session.query(models.Session).filter(models.Session.secret_uid == session_uuid)
     if q.first():
         if q.first().active:
             return db.session.query(models.User).filter(models.User.user_uuid == q.first().user_uuid).first()
@@ -132,15 +132,14 @@ def set_session():
         session_in_db = q.first()
     else:
         session_in_db = q.first()
+        session_in_db.user_uuid = user_uuid
+        session_in_db.active = True
+        db.session.commit()
         if session_in_db:
             if session_in_db.active == False:
-                for key in session.keys():
-                    session.pop(key, None)
                 redirect(url_for('login'))
         else:
-            for key in session.keys():
-                session.pop(key, None)
-                redirect(url_for('login'))
+            redirect(url_for('login'))
     session['oauth_id'] = oauth_data['id']
     next = request.args.get('next', '/')
     if next.startswith('https://'):
@@ -153,7 +152,7 @@ google = oauth.remote_app('google',
           base_url='https://www.google.com/accounts/',
           authorize_url='https://accounts.google.com/o/oauth2/auth',
           request_token_url=None,
-          request_token_params={'prompt': 'select_account', 'scope': 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/user.birthday.read',
+          request_token_params={'prompt': 'select_account', 'scope': 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
                                 'response_type': 'code', 'state': ''},
           access_token_url='https://accounts.google.com/o/oauth2/token',
           access_token_method='POST',
@@ -195,18 +194,18 @@ def logout():
         db.session.commit()
     except AttributeError:
         pass
-    for key in session.keys():
-        session.pop(key, None)
-    
     return redirect('/')
 
 
 @app.errorhandler(404) # We always return index.html if route not found because we use Vue.JS routing
 def page_not_found(e):
     session_uuid = session.get('session_uuid')
+    if session_uuid: # validate the session uuid
+        if not db.session.query(models.Session).filter(models.Session.secret_uuid == session.get('session_uuid')):
+            session_uuid = None
     if not session_uuid:
         new_session = models.Session(
-            active = True
+            active = False
         )
         db.session.add(new_session)
         db.session.commit()
@@ -216,7 +215,9 @@ def page_not_found(e):
     if ',' in ip_address:
         ip_address = ip_address.split(',')[0]
     data = {"ip_address": ip_address}
-    data['session_public_uuid'] = str(db.session.query(models.Session).filter(models.Session.secret_uuid == session.get('session_uuid')).first().public_uuid)
+    session_data = db.session.query(models.Session).filter(models.Session.secret_uuid == session.get('session_uuid')).first()
+    data['session_public_uuid'] = str(session_data.public_uuid)
+    data['is_logged_in'] = session_data.active
     data['url'] = request.url
     data['time_arrived'] = calendar.timegm(time.gmtime())*1000
     data['referrer'] = request.referrer

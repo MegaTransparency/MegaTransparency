@@ -1,6 +1,8 @@
 3/27/17
 
-* 12:00AM - : 
+* 8:34PM - 8:48PM: more fixes to session code, filed a request to Seattle Police for RMS operational status and case access audit trail
+* 7:10AM - 7:46AM: for the 30 minute privacy grace period start looking into adding user_uuid to all page view rows with current session public uuid, file request to Seattle Police for customized access fee to get audit trail data for body cams
+* 12:00AM - 12:38AM: working on 30 minute privacy grace period
 
 3/26/17
 
