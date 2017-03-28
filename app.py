@@ -224,7 +224,7 @@ def page_not_found(e):
     if session_data.user_uuid:
         data['user_uuid'] = str(session_data.user_uuid)
         db.session.query(models.PageViews).filter(models.PageViews.data['session_public_uuid'] == str(session_data.public_uuid)).update({'data': cast(cast(models.PageViews.data, JSONB)
-                       .concat(func.jsonb_build_object('user_uuid', str(session_data.user_uuid))), JSON)})
+                       .concat(func.jsonb_build_object('user_uuid', str(session_data.user_uuid))), JSON)}, synchronize_session="fetch")
     user_agent = request.user_agent
     for key in ['platform', 'browser', 'version', 'language', 'string']:
         data['user_agent_'+key] = getattr(user_agent, key)
