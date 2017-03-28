@@ -215,7 +215,7 @@ def page_not_found(e):
         ip_address = ip_address.split(',')[0]
     data = {"ip_address": ip_address}
     session_data = db.session.query(models.Session).filter(models.Session.secret_uuid == session.get('session_uuid')).first()
-    db.session.query(models.PageViews).filter(models.PageViews.session_public_uuid == str(session_data.public_uuid)).update({data: cast(
+    db.session.query(models.PageViews).filter(models.PageViews.data['session_public_uuid'] == str(session_data.public_uuid)).update({data: cast(
         cast(users.data, JSONB).concat(func.jsonb_build_object('user_uuid', str(session_data.user_uuid))), JSONB)}, synchronize_session="fetch")
     data['session_public_uuid'] = str(session_data.public_uuid)
     data['is_logged_in'] = session_data.active
