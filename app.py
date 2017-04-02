@@ -200,8 +200,8 @@ def logout():
 @app.route('/api/query_public_data')
 def query_public_data():
     try:
-        conn = psycopg2.connect("dbname='megatransparency' user='public_data_query' host='localhost' password='dbpass'")
-    except
+        conn = psycopg2.connect("dbname='megatransparency' user='public_data_query' host='localhost' password='%s'" % (app.config['PUBLIC_DATA_QUERY_PASSWORD']))
+    except:
         return flask.jsonify(success=False, error="can't connect to database as public query user")
     try:
         cur = conn.cursor()
