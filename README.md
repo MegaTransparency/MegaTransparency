@@ -107,9 +107,9 @@ sudo apt-get install uwsgi
 git clone https://github.com/wayeasycorp/megatransparency.git
 cd megatransparency
 cp _config.py.example _config.py
-virtualenv env --distribute
+virtualenv --python=/usr/bin/python2 env
 source env/bin/activate
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 sudo apt-get install -y postgresql postgresql-contrib
 sudo usermod -a -G sudo postgres
 sudo -u postgres psql
