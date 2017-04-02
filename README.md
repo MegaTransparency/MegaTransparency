@@ -1,6 +1,6 @@
-# FreeOpenData.com
+# MegaTransparency.com
 
-FreeOpenData.com is a soon to be launched website centralizing open data, data journalism, open data powered apps, and publishers and users of open data. The Founder/Chief Innvoation Officer of FreeOpenData.com is Tim Clemans, whose job is to overwhelm the competition with innovation and transparency. Tim's day: code all night, go to Farestart, code, eat, sleep, and right back at making the world better through open data. Performance goal: get Kevin Merritt, CEO of Socrata (Tim lives a block away from their HQ), to send a hastily written company wide email saying "we must take right a right turn right now or a homeless dude is going to put us out of business." Email us at info@freeopendata.com Note emails will be auto published. 
+MegaTransparency.com is a soon to be launched website centralizing open data, data journalism, open data powered apps, and publishers and users of mostly government information. The Founder/Chief Innovation Officer of MegaTransparency.com is Tim Clemans, whose job is to overwhelm the competition with innovation and transparency. Tim's day: code all night, go to Farestart, code, eat, sleep, and right back at making the world better through open data. Performance goal: get Kevin Merritt, CEO of Socrata (Tim lives a block away from their HQ), to send a hastily written company wide email saying "we must take right a right turn right now or a homeless dude is going to put us out of business." Email us at info@megatransparency.com Note emails will be auto published. 
 
 ## Big thanks to
 
@@ -8,7 +8,7 @@ King County criminal justice system, Sound Mental Health, my parents, girlfriend
 
 ## Mission and Strategy
 
-The mission of FreeOpenData.com is to make organizations, particularly government agencies, transparent by default. The short version of the strategy is make billions of dollars each year so we can offer governments the sweet deal of taking over transparency efforts for free. The long version of the strategy is to create overwhelming public demand for transparency, advocate well for forceful black and white transparency laws, make the disclosure of information as efficient as possible, use public disclosure laws to their fullest reasonable potential, and make it extremely easy to make positive use of open data. A key strategy for making governments transparent by default is to get to the point where FreeOpenData can completely take over transparency work at no cost to each agency. The information would be made available to the public completely free. In order to do this, FreeOpenData needs about sixty million dollars a year just for Washington State. So the business plan is to create the most popular open data site and generate money through subscription plans, consulting, advertising, job boards, book and course publishing, affiliate marketing, and swag.
+The mission of MegaTransparency.com is to make organizations, particularly government agencies, transparent by default. The short version of the strategy is make billions of dollars each year so we can offer governments the sweet deal of taking over transparency efforts for free. The long version of the strategy is to create overwhelming public demand for transparency, advocate well for forceful black and white transparency laws, make the disclosure of information as efficient as possible, use public disclosure laws to their fullest reasonable potential, and make it extremely easy to make positive use of open data. A key strategy for making governments transparent by default is to get to the point where megatransparency can completely take over transparency work at no cost to each agency. The information would be made available to the public completely free. In order to do this, megatransparency needs about sixty million dollars a year just for Washington State. So the business plan is to create the most popular open data site and generate money through subscription plans, consulting, advertising, job boards, book and course publishing, affiliate marketing, and swag.
 
 We will generate overwhelming public demand for transparency by putting on lots of public presentations about transparency, being on the news every month advocating that the public demand transparency. We will track the uses of transparency.
 
@@ -23,15 +23,15 @@ Most of today's transparency laws are transparency to a given requester. We want
 1. Raw data powering cloud services used by the government be subject to disclosure. For example Taser's evidence.com has an audit trail system. The entire listing of what happened to each piece of evidence should be public just like that for Seattle Police's COBAN dashcam system: https://data.seattle.gov/Public-Safety/COBAN-Logs/tpvk-5fr3/data
 1. Companies publish diversity stats
 
-To make the disclosure of information as efficient as possible FOD will provide a free open source hosted viable alternative to expensive open data and records requesting portals.
+To make the disclosure of information as efficient as possible MT will provide a free open source hosted viable alternative to expensive open data and records requesting portals.
 
-In the beginning FOD is going to have to request most data through the various public records acts. 
+In the beginning MT is going to have to request most data through the various public records acts. 
 
 Make the use of open data so easy that people pay good money to use the same tools on private data.
 
 ## History
 
-The site was created in response to http://datasmart.ash.harvard.edu/news/article/an-open-letter-to-the-open-data-community-988 and an erroneous Google marketing blurb claiming public datasets are hosted for free on BigQuery. FreeOpenData.com is owned by WayEasy Corporation, which is lead by Tim Clemans https://transparenttim.com. Tim had the honor of working for Seattle Police as an employee piloting automatic publishing of over-redacted body camera videos and police report narratives to give frequent records requesters a tool for making narrow records requests, see https://www.nytimes.com/2016/10/23/magazine/police-body-cameras.html?_r=0 Tim is currently homeless, housed in a private room in a shelter, while he finishes life skills and food service training at http://farestart.org Starting in about two months, he needs to make about a thousand a month to make ends meet. Becoming a contractor for Socrata to improve on what he did at Seattle Police fell through and his last employer SageMath Inc https://sagemathcloud.com decided it was too stressful to review the code he wrote. So now he's focusing on employing himself to make governments transparent by default. Funding for the site currently comes from Tim's parents. 
+The site was created in response to http://datasmart.ash.harvard.edu/news/article/an-open-letter-to-the-open-data-community-988 and an erroneous Google marketing blurb claiming public datasets are hosted for free on BigQuery. MegaTransparency.com is owned by WayEasy Corporation, which is lead by Tim Clemans https://transparenttim.com. Tim had the honor of working for Seattle Police as an employee piloting automatic publishing of over-redacted body camera videos and police report narratives to give frequent records requesters a tool for making narrow records requests, see https://www.nytimes.com/2016/10/23/magazine/police-body-cameras.html?_r=0 Tim is currently homeless, housed in a private room in a shelter, while he finishes life skills and food service training at http://farestart.org Starting in about two months, he needs to make about a thousand a month to make ends meet. Becoming a contractor for Socrata to improve on what he did at Seattle Police fell through and his last employer SageMath Inc https://sagemathcloud.com decided it was too stressful to review the code he wrote. So now he's focusing on employing himself to make governments transparent by default. Funding for the site currently comes from Tim's parents. 
 
 ## Values
 
@@ -47,7 +47,7 @@ Competitive strategy: overhelm the competition with innovation and transparency
 
 Top competitors: https://muckrock.com, https://www.kaggle.com/, https://data.world, https://socrata.com, https://carto.com/, https://opengov.com/, http://govqa.com/, and https://www.nextrequest.com/.
 
-Initially we're focused on competeting with MuckRock and DataWorld because these sites focus on making money from end users like us. It'll take time to build the government relationships needed to compete with Socrata, OpenGov, Carto, GovQA, and NextRequest. It's important that Socrata in particular see FreeOpenData as encouraging more agencies to adopt open data and look into Socrata. Maybe they can be advertisers at some point if user is using a known government computer. One strategy to consider with say Socrata is to say "We want transparency to be free and as automated as possible. What do you think of focusing on becoming the analytics platform governments rely on and make transparency an automatic byproduct of that?"
+Initially we're focused on competeting with MuckRock and DataWorld because these sites focus on making money from end users like us. It'll take time to build the government relationships needed to compete with Socrata, OpenGov, Carto, GovQA, and NextRequest. It's important that Socrata in particular see megatransparency as encouraging more agencies to adopt open data and look into Socrata. Maybe they can be advertisers at some point if user is using a known government computer. One strategy to consider with say Socrata is to say "We want transparency to be free and as automated as possible. What do you think of focusing on becoming the analytics platform governments rely on and make transparency an automatic byproduct of that?"
 
 ## Roadmap and Status
 
@@ -70,10 +70,10 @@ Initially we're focused on competeting with MuckRock and DataWorld because these
 
 ### Status
 
-See time log at https://github.com/wayeasycorp/FreeOpenData/blob/master/tims_time_log.md
+See time log at https://github.com/wayeasycorp/megatransparency/blob/master/tims_time_log.md
 
 * Recovering after server failed to boot
-* Currently copying Socrata's data catalog to BigQuery. https://bigquery.cloud.google.com/table/freeopendata-161213:copy_of_socrata_data.data_catalog
+* Currently copying Socrata's data catalog to BigQuery. https://bigquery.cloud.google.com/table/megatransparency-161213:copy_of_socrata_data.data_catalog
 * Writing script to copy to BigQuery and keep updated all Socrata datasets
 
 ## Infrastructure
@@ -104,8 +104,8 @@ sudo apt-get update
 sudo apt-get install -y build-essential python-dev git-core python-pip virtualenv nginx
 sudo pip install virtualenv uwsgi
 sudo apt-get install uwsgi
-git clone https://github.com/wayeasycorp/FreeOpenData.git
-cd FreeOpenData
+git clone https://github.com/wayeasycorp/megatransparency.git
+cd megatransparency
 cp _config.py.example _config.py
 virtualenv env --distribute
 source venv/bin/activate
@@ -113,10 +113,10 @@ pip install -r requirements.txt
 sudo apt-get install -y postgresql postgresql-contrib
 sudo usermod -a -G sudo postgres
 sudo -u postgres psql
-CREATE DATABASE freeopendata;
-CREATE USER freeopendata WITH PASSWORD '****changeme****';
-GRANT ALL PRIVILEGES ON DATABASE "freeopendata" to freeopendata;
-\connect freeopendata
+CREATE DATABASE megatransparency;
+CREATE USER megatransparency WITH PASSWORD '****changeme****';
+GRANT ALL PRIVILEGES ON DATABASE "megatransparency" to megatransparency;
+\connect megatransparency
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 \q
 ```
@@ -127,15 +127,15 @@ uwsgi --socket 0.0.0.0:8000 --protocol=http -w wsgi --callable=app
 ```
 
 ```
-sudo cp etc_nginx_sites_available_freeopendata_com /etc/nginx/sites-available/freeopendata.com
-sudo ln -s /etc/nginx/sites-available/freeopendata.com /etc/nginx/sites-enabled/freeopendata.com
+sudo cp etc_nginx_sites_available_megatransparency_com /etc/nginx/sites-available/megatransparency.com
+sudo ln -s /etc/nginx/sites-available/megatransparency.com /etc/nginx/sites-enabled/megatransparency.com
 sudo service nginx restart
 ```
 Below is from http://serverfault.com/questions/775965/wiring-uwsgi-to-work-with-django-and-nginx-on-ubuntu-16-04
 ```
 sudo mkdir /etc/uwsgi/
 sudo mkdir /etc/uwsgi/sites
-sudo cp freeopendata.ini /etc/uwsgi/sites/freeopendata.ini
+sudo cp megatransparency.ini /etc/uwsgi/sites/megatransparency.ini
 sudo cp uwsgi.service /etc/systemd/system/uwsgi.service
 ```
 
@@ -143,6 +143,6 @@ sudo cp uwsgi.service /etc/systemd/system/uwsgi.service
 
 Currently am running this by hand each time I want to deploy latest code
 ```
-cd ~/FreeOpenData; source env/bin/activate; git pull; python manage.py db upgrade; sudo systemctl restart uwsgi
+cd ~/megatransparency; source env/bin/activate; git pull; python manage.py db upgrade; sudo systemctl restart uwsgi
 ```
 

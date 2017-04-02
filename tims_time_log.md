@@ -1,6 +1,14 @@
+4/1/17
+
+10:00PM - : setting up MegaTransparency. Doing name change etc. Main reason for change is I stupidly canceled my phone account without first disabling two factor. Figured best thing to do was create new domains account and new domain.
+
+3/28/17 - 3/31/17
+
+Had really bad week. Ended up in hospital for mental health.
+
 3/27/17
 
-* 11:18PM - : figuring out how to do if current_time > very first time arrived + 30 minutes SELECT date_part('epoch',now())*1000;
+* 11:18PM - 11:59PM: figuring out how to do if current_time > very first time arrived + 30 minutes SELECT date_part('epoch',now())*1000;
 * 9:36PM - 11:14PM: figuring out how to update past page views with user uuid 
 * 8:48PM - 9:17PM: came up with this query to get the first time arrived for each session uuid SELECT 'session_public_uuid' AS what_uuid, session_public_uuid, min(time_arrived) AS first_time_arrived FROM (SELECT data->>'session_public_uuid' AS session_public_uuid, data->>'time_arrived' AS time_arrived FROM page_views) AS pv WHERE session_public_uuid IS NOT NULL GROUP BY session_public_uuid UNION SELECT 'user_uuid' AS what_uuid, user_uuid, min(time_arrived) AS first_time_arrived FROM (SELECT data->>'user_uuid' AS user_uuid, data->>'time_arrived' AS time_arrived FROM page_views) AS pv WHERE user_uuid IS NOT NULL GROUP BY user_uuid;
 * 8:34PM - 8:48PM: more fixes to session code, filed a request to Seattle Police for RMS operational status and case access audit trail
