@@ -8,7 +8,7 @@ King County criminal justice system, Sound Mental Health, my parents, girlfriend
 
 ## Mission and Strategy
 
-The mission of MegaTransparency.com is to efficiently publish as much legally obtainable "interesting" information as possible in a machine readable format as quickly as possible. Aka make particularly government agencies transparent by default. The short version of the strategy is make billions of dollars each year so we can offer governments the sweet deal of taking over transparency efforts for free. The long version of the strategy is to create overwhelming public demand for transparency, advocate well for forceful black and white transparency laws, make the disclosure of information as efficient as possible, use public disclosure laws to their fullest reasonable potential, and make it extremely easy to make positive use of open data. A key strategy for making governments transparent by default is to get to the point where MegaTransparency can completely take over transparency work at no cost to each agency. The information would be made available to the public completely free. In order to do this, MegaTransparency needs about sixty million dollars a year just for Washington State. So the business plan is to create the most popular open data site and generate money through subscription plans, consulting, advertising, job boards, book and course publishing, affiliate marketing, and swag.
+The mission of MegaTransparency.com is is to publish all the world's interesting public information in one place and make good use of it. Aka make particularly government agencies transparent by default. The short version of the strategy is make billions of dollars each year so we can offer governments the sweet deal of taking over transparency efforts for free. The long version of the strategy is to create overwhelming public demand for transparency, advocate well for forceful black and white transparency laws, make the disclosure of information as efficient as possible, use public disclosure laws to their fullest reasonable potential, and make it extremely easy to make positive use of open data. A key strategy for making governments transparent by default is to get to the point where MegaTransparency can completely take over transparency work at no cost to each agency. The information would be made available to the public completely free. In order to do this, MegaTransparency needs about sixty million dollars a year just for Washington State. So the business plan is to create the most popular open data site and generate money through subscription plans, consulting, advertising, job boards, book and course publishing, affiliate marketing, and swag.
 
 We will generate overwhelming public demand for transparency by putting on lots of public presentations about transparency, being on the news every month advocating that the public demand transparency. We will track the uses of transparency.
 
@@ -108,7 +108,7 @@ git clone https://github.com/wayeasycorp/megatransparency.git
 cd megatransparency
 cp _config.py.example _config.py
 virtualenv env --distribute
-source venv/bin/activate
+source env/bin/activate
 pip install -r requirements.txt
 sudo apt-get install -y postgresql postgresql-contrib
 sudo usermod -a -G sudo postgres

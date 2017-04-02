@@ -36,11 +36,11 @@ server {
 	# Don't use them in a production server!
 	#
 	# include snippets/snakeoil.conf;
-	server_name freeopendata.com;
+	server_name megatransparency.com;
 	# pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
     location / {	#
         include uwsgi_params;
-        uwsgi_pass unix:/home/main/FreeOpenData/freeopendata.sock;
+        uwsgi_pass unix:/home/main/MegaTransparency/megatransparency.sock;
     }
 	#	# With php7.0-fpm:
 	#	fastcgi_pass unix:/run/php/php7.0-fpm.sock;

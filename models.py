@@ -53,3 +53,11 @@ class PageViews(db.Model):
     uuid = Column(UUID(as_uuid=True),
         server_default=sqlalchemy.text("uuid_generate_v4()"), primary_key=True)
     data = db.Column(postgresql.JSONB, nullable=False)
+
+class PublicPageViews(db.Model):
+    
+    __tablename__ = "public_page_views"
+    
+    uuid = Column(UUID(as_uuid=True),
+        server_default=sqlalchemy.text("uuid_generate_v4()"), primary_key=True)
+    data = db.Column(postgresql.JSONB, nullable=False)
