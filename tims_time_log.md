@@ -1,10 +1,14 @@
+4/2/17
+
+
+
 4/1/17
 
-10:00PM - : setting up MegaTransparency. Doing name change etc. Main reason for change is I stupidly canceled my phone account without first disabling two factor. Figured best thing to do was create new domains account and new domain.
+* 10:00PM - 10:50PM: setting up MegaTransparency. Doing name change etc. Main reason for change is I stupidly canceled my phone account without first disabling two factor. Phone company said it wasn't possible to get a new account with old phone number even though old number isn't in use. Figured best thing to do was create new domains account and new domain.
 
 3/28/17 - 3/31/17
 
-Had really bad week. Ended up in hospital for mental health.
+* Had really bad week. Ended up in hospital for mental health.
 
 3/27/17
 
