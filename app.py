@@ -19,6 +19,7 @@ from threading import Thread
 thread = None
 from sqlalchemy.dialects.postgresql import JSONB, JSON
 from sqlalchemy.sql.expression import cast, func
+import psycopg2
 
 app.config.from_pyfile('_config.py')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -196,7 +197,22 @@ def logout():
         pass
     return redirect('/')
 
-
+@app.route('/api/query_public_data')
+def query_public_data():
+    try:
+        conn = psycopg2.connect("dbname='megatransparency' user='public_data_query' host='localhost' password='dbpass'")
+    except
+        return flask.jsonify(success=False, error="can't connect to database as public query user")
+    try:
+        cur = conn.cursor()
+        sql = request.args.get('sql')
+        cur.execute(sql)
+        data_to_return = json.dumps(cur.fetchall(), indent=2)
+        flask.jsonify(success=False, data=data_to_return, sql=sql)
+        cur.close()
+    except Exception, e:
+        return flask.jsonify(success=False, error=traceback.format_exc())
+    
 @app.errorhandler(404) # We always return index.html if route not found because we use Vue.JS routing
 def page_not_found(e):
     session_uuid = session.get('session_uuid')

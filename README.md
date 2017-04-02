@@ -104,7 +104,7 @@ sudo apt-get update
 sudo apt-get install -y build-essential python-dev git-core python-pip virtualenv nginx
 sudo pip install virtualenv uwsgi
 sudo apt-get install uwsgi
-git clone https://github.com/wayeasycorp/megatransparency.git
+git clone https://github.com/megatransparency/megatransparency.git
 cd megatransparency
 cp _config.py.example _config.py
 virtualenv --python=/usr/bin/python2 env
@@ -115,8 +115,11 @@ sudo usermod -a -G sudo postgres
 sudo -u postgres psql
 CREATE DATABASE megatransparency;
 CREATE USER megatransparency WITH PASSWORD '****changeme****';
+CREATE USER public_data_query WITH PASSWORD '****changeme****';
 GRANT ALL PRIVILEGES ON DATABASE "megatransparency" to megatransparency;
 \connect megatransparency
+GRANT USAGE ON SCHEMA megatransparency TO public_data_query;
+GRANT SELECT ON megatransparency.public_page_views TO public_data_query;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 \q
 ```
@@ -143,6 +146,6 @@ sudo cp uwsgi.service /etc/systemd/system/uwsgi.service
 
 Currently am running this by hand each time I want to deploy latest code
 ```
-cd ~/megatransparency; source env/bin/activate; git pull; python manage.py db upgrade; sudo systemctl restart uwsgi
+cd ~/MegaTransparency; source env/bin/activate; git pull; python manage.py db upgrade; sudo systemctl restart uwsgi
 ```
 
