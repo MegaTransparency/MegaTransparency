@@ -20,7 +20,7 @@ thread = None
 from sqlalchemy.dialects.postgresql import JSONB, JSON
 from sqlalchemy.sql.expression import cast, func
 import psycopg2
-
+import traceback
 app.config.from_pyfile('_config.py')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
