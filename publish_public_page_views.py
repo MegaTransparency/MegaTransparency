@@ -60,6 +60,8 @@ WHERE  uuid NOT IN (SELECT uuid FROM already_published_uuids)
     try:
         cur = conn.cursor()
         cur.execute(query)
+        conn.commit()
         cur.close()
+        conn.close()
     except Exception, e:
         print traceback.format_exc()

@@ -210,6 +210,7 @@ def query_public_data():
         data_to_return = json.dumps(cur.fetchall(), indent=2)
         return flask.jsonify(success=True, data=data_to_return, sql=sql)
         cur.close()
+        conn.close()
     except Exception, e:
         return flask.jsonify(success=False, error=traceback.format_exc())
     
