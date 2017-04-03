@@ -1,6 +1,6 @@
 4/2/17
 
-
+* was sloopy and didn't record my times. Wrote script that publishes public page views and wrote API to access it
 
 4/1/17
 
