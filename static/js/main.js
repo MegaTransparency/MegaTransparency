@@ -38,6 +38,7 @@ $(function() {
       el: '#app',
       data: {
         message: 'Hello Vue!'
-      }
+      },
+      delimiters: ["((","))"]
     })
 });
