@@ -238,7 +238,7 @@ def query_public_data():
     except Exception, e:
         error = traceback.format_exc()
         if 'canceling statement due to statement timeout' in error:
-            error = "query didn't execute in under the required three seconds"
+            error = "query didn't finish within the required three seconds"
         return flask.jsonify(success=False, error=error)
     
 @app.errorhandler(404) # We always return index.html if route not found because we use Vue.JS routing
