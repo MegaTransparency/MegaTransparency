@@ -1,6 +1,10 @@
+4/3/17
+
+* 4:00PM - : make font size smaller, log almost every view and get/post data so can make a show me my past queries, add login/logout links
+
 4/2/17
 
-* was sloopy and didn't record my times. Wrote script that publishes public page views and wrote API to access it
+* was sloppy and didn't record my times. Wrote script that publishes public page views and wrote API to access it
 
 4/1/17
 
