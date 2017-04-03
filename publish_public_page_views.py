@@ -31,7 +31,7 @@ WITH already_published_uuids
 SELECT uuid,
        data
 FROM   page_views
-WHERE  uuid NOT IN (already_published_uuids)
+WHERE  uuid NOT IN (SELECT uuid FROM already_published_uuids)
        AND data ->> 'time_arrived' IS NOT NULL
        AND data ->> 'time_left' IS NOT NULL
        AND ( Date_part('epoch', Now()) * 1000 > (SELECT first_time_arrived ::
