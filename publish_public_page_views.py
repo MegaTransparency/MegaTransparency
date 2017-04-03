@@ -52,7 +52,7 @@ WHERE  uuid NOT IN (SELECT uuid FROM already_published_uuids)
                    AND uuid = data ->>
                        'user_uuid'
                                                       )
-                   AND data ->> 'user_uuid' IS NOT NULL ) )) """
+                   AND data ->> 'user_uuid' IS NOT NULL ) )); """
     try:
         conn = psycopg2.connect("dbname='megatransparency' user='%s' host='localhost' password='%s'" % (app.config['USERNAME'], app.config['PASSWORD']))
     except:
