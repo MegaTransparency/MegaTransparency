@@ -1,6 +1,7 @@
 from flask import Flask
 app = Flask(__name__)
 import psycopg2
+import traceback
 app.config.from_pyfile('_config.py')
 
 while True:
