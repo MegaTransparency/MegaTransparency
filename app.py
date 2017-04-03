@@ -5,7 +5,7 @@ import requests
 import stripe
 import json
 import flask
-from flask import Flask, render_template, request, redirect, session, url_for
+from flask import Flask, render_template, request, redirect, session, url_for, g
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask_socketio import SocketIO
 from flask_failsafe import failsafe
@@ -241,46 +241,53 @@ def query_public_data():
         if 'canceling statement due to statement timeout' in error:
             error = "query didn't finish within the required three seconds"
         return flask.jsonify(success=False, error=error)
+
+@app.before_request
+def log_page_view():
+    if not 'update_page_view' in request.path or 'set_session' in request.path or 'oauth' in request.path:
+        
+        session_uuid = session.get('session_uuid')
+        if session_uuid: # validate the session uuid
+            if not db.session.query(models.Session).filter(models.Session.secret_uuid == session.get('session_uuid')):
+                session_uuid = None
+        if not session_uuid:
+            new_session = models.Session(
+                active = False
+            )
+            db.session.add(new_session)
+            db.session.commit()
+            session['session_uuid'] = new_session.secret_uuid
+        ip_address = request.headers.get('X-Forwarded-For', request.remote_addr)
+        if ',' in ip_address:
+            ip_address = ip_address.split(',')[0]
+        data = {"ip_address": ip_address}
+        session_data = db.session.query(models.Session).filter(models.Session.secret_uuid == session.get('session_uuid')).first()
+        data['session_public_uuid'] = str(session_data.public_uuid)
+        data['is_logged_in'] = session_data.active
+        data['url'] = request.url
+        data['time_arrived'] = calendar.timegm(time.gmtime())*1000
+        data['referrer'] = request.referrer
+        data['post_data'] = dict(request.form)
+        data['get_data'] = dict(request.get)
+        print 'SESSION DATA', session_data.user_uuid
+        if session_data.user_uuid:
+            data['user_uuid'] = str(session_data.user_uuid)
+            db.session.query(models.PageViews).filter(models.PageViews.data['session_public_uuid'].astext == str(session_data.public_uuid)).update({'data': cast(cast(models.PageViews.data, JSONB)
+                           .concat(func.jsonb_build_object('user_uuid', str(session_data.user_uuid))), JSON)}, synchronize_session="fetch")
+        user_agent = request.user_agent
+        for key in ['platform', 'browser', 'version', 'language', 'string']:
+            data['user_agent_'+key] = getattr(user_agent, key)
+        new_page_view = models.PageViews(
+            data = data
+        )
+        db.session.add(new_page_view)
+        db.session.commit()
+        print db.session.query(models.PageViews).filter(models.PageViews.uuid == new_page_view.uuid).first().data
+        g.new_page_view_uuid = new_page_view.uuid
     
 @app.errorhandler(404) # We always return index.html if route not found because we use Vue.JS routing
 def page_not_found(e):
-    session_uuid = session.get('session_uuid')
-    if session_uuid: # validate the session uuid
-        if not db.session.query(models.Session).filter(models.Session.secret_uuid == session.get('session_uuid')):
-            session_uuid = None
-    if not session_uuid:
-        new_session = models.Session(
-            active = False
-        )
-        db.session.add(new_session)
-        db.session.commit()
-        session['session_uuid'] = new_session.secret_uuid
-    ip_address = request.headers.get('X-Forwarded-For', request.remote_addr)
-    if ',' in ip_address:
-        ip_address = ip_address.split(',')[0]
-    data = {"ip_address": ip_address}
-    session_data = db.session.query(models.Session).filter(models.Session.secret_uuid == session.get('session_uuid')).first()
-    data['session_public_uuid'] = str(session_data.public_uuid)
-    data['is_logged_in'] = session_data.active
-    data['url'] = request.url
-    data['time_arrived'] = calendar.timegm(time.gmtime())*1000
-    data['referrer'] = request.referrer
-    print 'SESSION DATA', session_data.user_uuid
-    if session_data.user_uuid:
-        data['user_uuid'] = str(session_data.user_uuid)
-        db.session.query(models.PageViews).filter(models.PageViews.data['session_public_uuid'].astext == str(session_data.public_uuid)).update({'data': cast(cast(models.PageViews.data, JSONB)
-                       .concat(func.jsonb_build_object('user_uuid', str(session_data.user_uuid))), JSON)}, synchronize_session="fetch")
-    user_agent = request.user_agent
-    for key in ['platform', 'browser', 'version', 'language', 'string']:
-        data['user_agent_'+key] = getattr(user_agent, key)
-    new_page_view = models.PageViews(
-        data = data
-    )
-    db.session.add(new_page_view)
-    db.session.commit()
-    print db.session.query(models.PageViews).filter(models.PageViews.uuid == new_page_view.uuid).first().data
-    print "new page uuid",  new_page_view.uuid
-    return render_template('index.html', page_view_uuid=new_page_view.uuid)
+    return render_template('index.html', page_view_uuid=g.new_page_view_uuid)
 
 @app.route('/api/update_page_view', strict_slashes=False, methods=['POST'])
 def update_page_view():
