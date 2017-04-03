@@ -60,13 +60,11 @@ WHERE  uuid NOT IN (SELECT uuid FROM already_published_uuids)
         cur = conn.cursor()
         cur.execute(query)
         conn.commit()
-        print '--- update query ---'
         query = """UPDATE public_page_views
-SET uuid=private.uuid,
+SET
     data=private.data
 FROM public_page_views AS public JOIN page_views AS private ON public.uuid = private.uuid WHERE public.data != private.data;"""
         cur.execute(query)
-        print 'end update query'
         conn.commit()
         cur.close()
         conn.close()
