@@ -268,7 +268,7 @@ def log_page_view():
         data['time_arrived'] = calendar.timegm(time.gmtime())*1000
         data['referrer'] = request.referrer
         data['post_data'] = dict(request.form)
-        data['get_data'] = dict(request.get)
+        data['get_data'] = dict(request.args)
         print 'SESSION DATA', session_data.user_uuid
         if session_data.user_uuid:
             data['user_uuid'] = str(session_data.user_uuid)
