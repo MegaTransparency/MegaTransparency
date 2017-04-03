@@ -232,7 +232,7 @@ def query_public_data():
             return flask.jsonify(success=False, error='sql query is missing')
         cur.execute(sql)
         data_to_return = [dict(row) for row in cur.fetchall()]
-        return flask.jsonify(success=True, data=data_to_return, sql=sql)
+        return flask.jsonify(success=True, data=data_to_return, sql=sql, columns=cur.description)
         cur.close()
         conn.close()
     except Exception, e:
