@@ -33,7 +33,6 @@ SELECT uuid,
 FROM   page_views
 WHERE  uuid NOT IN (SELECT uuid FROM already_published_uuids)
        AND data ->> 'time_arrived' IS NOT NULL
-       AND data ->> 'time_left' IS NOT NULL
        AND ( Date_part('epoch', Now()) * 1000 > (SELECT first_time_arrived ::
                                                               bigint +
                                                         60 * 30 * 1000
@@ -59,6 +58,12 @@ WHERE  uuid NOT IN (SELECT uuid FROM already_published_uuids)
         print "can't connect to database"
     try:
         cur = conn.cursor()
+        cur.execute(query)
+        conn.commit()
+        query = """UPDATE public_page_views
+SET uuid=private.uuid,
+    data=private.data
+FROM public_page_views AS public JOIN page_views AS private ON public.uuid = private.uuid WHERE public.data != private.data;"""
         cur.execute(query)
         conn.commit()
         cur.close()
