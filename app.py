@@ -219,13 +219,15 @@ class Timeout():
     def raise_timeout(self, *args):
         raise Timeout.Timeout()
 
-def run_query_of_public_data(sql):
+@app.route('/api/query_public_data')
+def query_public_data():
     try:
-        conn = psycopg2.connect("dbname='megatransparency' user='public_data_query' host='localhost' password='%s'" % (app.config['PUBLIC_DATA_QUERY_PASSWORD']))
+        conn = psycopg2.connect("dbname='megatransparency' user='public_data_query' host='localhost' password='%s' options='-c statement_timeout=3s'" % (app.config['PUBLIC_DATA_QUERY_PASSWORD']))
     except:
         return flask.jsonify(success=False, error="can't connect to database as public query user")
     try:
         cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        sql = request.args.get('sql')
         cur.execute(sql)
         data_to_return = [dict(row) for row in cur.fetchall()]
         return flask.jsonify(success=True, data=data_to_return, sql=sql)
@@ -233,14 +235,6 @@ def run_query_of_public_data(sql):
         conn.close()
     except Exception, e:
         return flask.jsonify(success=False, error=traceback.format_exc())
-        
-@app.route('/api/query_public_data')
-def query_public_data():
-    try:
-        with Timeout(3):
-            return run_query_of_public_data(request.args['sql'])
-    except Timeout.Timeout:
-        return flask.jsonify(success=False, error='query took longer than 3 seconds')
     
 @app.errorhandler(404) # We always return index.html if route not found because we use Vue.JS routing
 def page_not_found(e):
