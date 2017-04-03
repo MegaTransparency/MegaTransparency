@@ -20,6 +20,7 @@ thread = None
 from sqlalchemy.dialects.postgresql import JSONB, JSON
 from sqlalchemy.sql.expression import cast, func
 import psycopg2
+import psycopg2.extras
 import traceback
 app.config.from_pyfile('_config.py')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -204,7 +205,7 @@ def query_public_data():
     except:
         return flask.jsonify(success=False, error="can't connect to database as public query user")
     try:
-        cur = conn.cursor()
+        cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
         sql = request.args.get('sql')
         cur.execute(sql)
         data_to_return = json.dumps([dict(row) for row in cur.fetchall()], indent=2)
