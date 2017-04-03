@@ -238,7 +238,7 @@ def run_query_of_public_data(sql):
 def query_public_data():
     try:
         with Timeout(3):
-            return run_query_public_data(sql)
+            return run_query_of_public_data(sql)
     except Timeout.Timeout:
         return flask.jsonify(success=False, error='query took longer than 3 seconds')
     
