@@ -208,7 +208,7 @@ def query_public_data():
         cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
         sql = request.args.get('sql')
         cur.execute(sql)
-        data_to_return = json.dumps([dict(row) for row in cur.fetchall()], indent=2)
+        data_to_return = [dict(row) for row in cur.fetchall()]
         return flask.jsonify(success=True, data=data_to_return, sql=sql)
         cur.close()
         conn.close()
