@@ -227,14 +227,19 @@ def query_public_data():
         return flask.jsonify(success=False, error="can't connect to database as public query user")
     try:
         cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        sql = request.args.get('sql')
+        sql = request.args.get('sql', request.form.get('sql'))
+        if not sql:
+            return flask.jsonify(success=False, error='sql query is missing')
         cur.execute(sql)
         data_to_return = [dict(row) for row in cur.fetchall()]
         return flask.jsonify(success=True, data=data_to_return, sql=sql)
         cur.close()
         conn.close()
     except Exception, e:
-        return flask.jsonify(success=False, error=traceback.format_exc())
+        error = traceback.format_exc()
+        if 'canceling statement due to statement timeout' in error:
+            error = "query didn't execute in under the required three seconds"
+        return flask.jsonify(success=False, error=error)
     
 @app.errorhandler(404) # We always return index.html if route not found because we use Vue.JS routing
 def page_not_found(e):
