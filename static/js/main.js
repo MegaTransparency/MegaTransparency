@@ -39,6 +39,6 @@ $(function() {
       data: {
         message: 'Hello Vue!'
       },
-      delimiters: ["((","))"]
+      delimiters: ['${', '}']
     })
 });
