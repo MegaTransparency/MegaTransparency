@@ -1,5 +1,6 @@
 4/3/17
 
+* 6:00PM - : deal with login 
 * 4:00PM - 5:20PM: make font size smaller, log almost every view and get/post data so can make a show me my past queries, start using VueJS
 
 4/2/17

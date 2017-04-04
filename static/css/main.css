@@ -12,6 +12,7 @@ h1 {
 }
 .free {
     color:green;
+    font-weight:bold;
 }
       #main {
           padding:10px;
@@ -35,3 +36,4 @@ p {
 a:hover {
     text-decoration:none;
 }
+.account_links {float:right}
