@@ -63,7 +63,7 @@ WHERE  uuid NOT IN (SELECT uuid FROM already_published_uuids)
         query = """UPDATE public_page_views
 SET
     data=private.data
-FROM public_page_views AS public JOIN page_views AS private ON public.uuid = private.uuid WHERE uuid = public.uuid AND public.data != private.data;"""
+FROM public_page_views AS public JOIN page_views AS private ON public.uuid = private.uuid WHERE public_page_views.uuid = public.uuid AND public.data IS DISTINCT FROM private.data;"""
         cur.execute(query)
         conn.commit()
         cur.close()
