@@ -38,12 +38,14 @@ $(function() {
       el: '#app',
       data: {
         message: 'Hello Vue!',
-          is_logged_in: False
+          is_logged_in: false
       },
       delimiters: ['${', '}'],
       created: function() {
           window.app = this;
-          $.get('/api/is_logged_in', function(data) {app.is_logged_in=data.is_logged_in})
+          $.get('/api/is_logged_in', function(data) {
+              app.is_logged_in=data.is_logged_in
+          })
       }
     })
 });
