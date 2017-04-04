@@ -244,7 +244,7 @@ def query_public_data():
 
 @app.before_request
 def log_page_view():
-    if not 'update_page_view' in request.path or 'set_session' in request.path or 'oauth' in request.path:
+    if not 'update_page_view' in request.path or 'set_session' in request.path or 'oauth' in request.path or 'ico' in request.path or 'static' in request.path:
         
         session_uuid = session.get('session_uuid')
         if session_uuid: # validate the session uuid
