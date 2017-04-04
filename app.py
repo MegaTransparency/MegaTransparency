@@ -265,10 +265,21 @@ def log_page_view():
         data['session_public_uuid'] = str(session_data.public_uuid)
         data['is_logged_in'] = session_data.active
         data['url'] = request.url
+        if '?' in data['url']:
+            data['url'] = data['url'][:request.url.index('?')]
         data['time_arrived'] = calendar.timegm(time.gmtime())*1000
         data['referrer'] = request.referrer
+        if data['referrer'].startswith('https://megatransparency.com/'):
+            if '?' in data['referrer']:
+                data['referrer'] = data['referrer'][:request.url.index('?')]
+        if data['referrer'].startswith('https://accounts.google.com/AccountChooser'):
+            data['referrer'] = 'https://accounts.google.com/AccountChooser'
         data['post_data'] = dict(request.form)
         data['get_data'] = dict(request.args)
+        if 'session_uuid' in data['get_data']:
+            del data['get_data']['session_uuid']
+        if 'session_uuid' in data['get_data']:
+            del data['get_data']['access_token']
         print 'SESSION DATA', session_data.user_uuid
         if session_data.user_uuid:
             data['user_uuid'] = str(session_data.user_uuid)
