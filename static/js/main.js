@@ -35,7 +35,7 @@ $(function() {
         mouse_locations.push({'x': event.pageX, 'y': event.pageY})
     }));
     var app = new Vue({
-      el: '#app',
+      el: 'body',
       data: {
         message: 'Hello Vue!'
       },
