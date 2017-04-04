@@ -52,7 +52,7 @@ def get_user(request):
     print session_uuid
     if not session_uuid:
         return None
-    q = db.session.query(models.Session).filter(models.Session.secret_uid == session_uuid)
+    q = db.session.query(models.Session).filter(models.Session.secret_uuid == session_uuid)
     if q.first():
         if q.first().active:
             return db.session.query(models.User).filter(models.User.user_uuid == q.first().user_uuid).first()
