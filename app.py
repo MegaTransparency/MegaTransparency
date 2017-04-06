@@ -269,8 +269,8 @@ def log_page_view():
             data['url'] = data['url'][:request.url.index('?')]
         data['time_arrived'] = calendar.timegm(time.gmtime())*1000
         data['referrer'] = request.referrer
-        if data['referrer'].startswith('https://megatransparency.com/'):
-            if '?' in data['referrer']:
+        if data.get('referrer', '').startswith('https://megatransparency.com/'):
+            if '?' in data.get('referrer', ''):
                 data['referrer'] = data['referrer'][:request.url.index('?')]
         if data['referrer'].startswith('https://accounts.google.com/AccountChooser'):
             data['referrer'] = 'https://accounts.google.com/AccountChooser'
