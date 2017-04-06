@@ -273,8 +273,8 @@ def log_page_view():
             if data.get('referrer', '').startswith('https://megatransparency.com/'):
                 if '?' in data.get('referrer', ''):
                     data['referrer'] = data['referrer'][:request.url.index('?')]
-        if data['referrer'].startswith('https://accounts.google.com/AccountChooser'):
-            data['referrer'] = 'https://accounts.google.com/AccountChooser'
+            if data['referrer'].startswith('https://accounts.google.com/AccountChooser'):
+                data['referrer'] = 'https://accounts.google.com/AccountChooser'
         data['post_data'] = dict(request.form)
         data['get_data'] = dict(request.args)
         if 'session_uuid' in data['get_data']:
