@@ -231,7 +231,7 @@ def query_public_data():
         if not sql:
             return flask.jsonify(success=False, error='sql query is missing')
         cur.execute(sql)
-        data_to_return = [dict(row) for row in cur.fetchall()]
+        data_to_return = [dict([(row[0], str(row[1])) for row in row]) for row in cur.fetchall()]
         columns = [{'name': row[0], 'type': row[1]} for row in cur.description]
         return flask.jsonify(success=True, data=data_to_return, sql=sql, columns=columns)
         cur.close()

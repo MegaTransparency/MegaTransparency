@@ -120,6 +120,7 @@ GRANT ALL PRIVILEGES ON DATABASE "megatransparency" to megatransparency;
 \connect megatransparency
 GRANT USAGE ON SCHEMA megatransparency TO public_data_query;
 GRANT SELECT ON megatransparency.public_page_views TO public_data_query;
+GRANT SELECT ON megatransparency.voters TO public_data_query;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 \q
 ```
@@ -140,6 +141,53 @@ sudo mkdir /etc/uwsgi/
 sudo mkdir /etc/uwsgi/sites
 sudo cp megatransparency.ini /etc/uwsgi/sites/megatransparency.ini
 sudo cp uwsgi.service /etc/systemd/system/uwsgi.service
+```
+
+If you need to quickly delete page view data because of unwanted leakage do
+
+`DELETE FROM page_views; DELETE FROM public_page_views;`
+
+```
+CREATE TABLE voters (
+        "StateVoterID" TEXT PRIMARY KEY,
+        "CountyVoterID" TEXT,
+        "Title" TEXT,
+        "FName" TEXT,
+        "MName" TEXT,
+        "LName" TEXT,
+        "NameSuffix" TEXT,
+        "Birthdate" TEXT,
+        "Gender" TEXT,
+        "RegStNum" TEXT,
+        "RegStFrac" TEXT,
+        "RegStName" TEXT,
+        "RegStType" TEXT,
+        "RegUnitType" TEXT,
+        "RegStPreDirection" TEXT,
+        "RegStPostDirection" TEXT,
+        "RegUnitNum" TEXT,
+        "RegCity" TEXT,
+        "RegState" TEXT,
+        "RegZipCode" TEXT,
+        "CountyCode" TEXT,
+        "PrecinctCode" TEXT,
+        "PrecinctPart" TEXT,
+        "LegislativeDistrict" TEXT,
+        "CongressionalDistrict" TEXT,
+        "Mail1" TEXT,
+        "Mail2" TEXT,
+        "Mail3" TEXT,
+        "Mail4" TEXT,
+        "MailCity" TEXT,
+        "MailZip" TEXT,
+        "MailState" TEXT,
+        "MailCountry" TEXT,
+        "Registrationdate" DATE,
+        "AbsenteeType" TEXT,
+        "LastVoted" TEXT,
+        "StatusCode" TEXT,
+        "Dflag" TEXT
+);
 ```
 
 ### Deployment
