@@ -149,14 +149,15 @@ If you need to quickly delete page view data because of unwanted leakage do
 
 ```
 CREATE TABLE voters (
-        "StateVoterID" TEXT PRIMARY KEY,
+        "slug" TEXT PRIMARY KEY,
+        "StateVoterID" TEXT,
         "CountyVoterID" TEXT,
         "Title" TEXT,
         "FName" TEXT,
         "MName" TEXT,
         "LName" TEXT,
         "NameSuffix" TEXT,
-        "Birthdate" TEXT,
+        "Birthdate" DATE,
         "Gender" TEXT,
         "RegStNum" TEXT,
         "RegStFrac" TEXT,
@@ -184,7 +185,7 @@ CREATE TABLE voters (
         "MailCountry" TEXT,
         "Registrationdate" DATE,
         "AbsenteeType" TEXT,
-        "LastVoted" TEXT,
+        "LastVoted" DATE,
         "StatusCode" TEXT,
         "Dflag" TEXT
 );

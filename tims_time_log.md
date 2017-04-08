@@ -1,3 +1,12 @@
+4/6/17
+
+* 12:13PM - 2:20PM: writing ETL script for Washington Voter Registration, talking with a reporter who told me to look up Pink Hankasher, writing a Socrata query for officers with most level 2/3 use of force
+* sloppy didn't record time prior to 12:13PM
+
+4/4/17 - 4/5/17
+
+* sloppy didn't record time
+
 4/3/17
 
 * 6:00PM - : deal with login 

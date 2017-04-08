@@ -22,3 +22,5 @@ Flask-Script
 sqlalchemy
 sqlalchemy-migrate
 Flask-Migrate
+csvkit
+python-slugify

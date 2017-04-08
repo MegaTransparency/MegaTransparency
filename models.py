@@ -5,6 +5,7 @@ from sqlalchemy.dialects import postgresql
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy import Column
 import sqlalchemy
+from slugify import slugify
 
 class User(db.Model):
     
@@ -61,3 +62,15 @@ class PublicPageViews(db.Model):
     uuid = Column(UUID(as_uuid=True),
         server_default=sqlalchemy.text("uuid_generate_v4()"), primary_key=True)
     data = db.Column(postgresql.JSONB, nullable=False)
+
+class App(db.Model):
+    
+    __tablename__ = "apps"
+    
+    slug = db.Column(db.String, primary_key=True)
+    name = db.Column(db.String, unique=True)
+
+    def __init__(self, *args, **kwargs):
+        if not 'slug' in kwargs:
+            kwargs['slug'] = slugify(kwargs.get('name', ''))
+        super().__init__(*args, **kwargs)
