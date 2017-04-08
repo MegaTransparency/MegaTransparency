@@ -10,6 +10,9 @@ h1 {
     font-size:1.25em;
     display:inline;
 }
+h2 {
+    font-size:1.75em;
+}
 .free {
     color:green;
     font-weight:bold;
