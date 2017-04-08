@@ -301,7 +301,7 @@ def look_up_page_title_and_description(request):
     page_title = ''
     page_description = ''
     print "request path", request.path
-    if request.path == '' OR request.path == '/':
+    if request.path == '' or request.path == '/':
         page_title = 'Home'
         page_description = "A site aiming to efficiently publish all the world's interesting public information in one well organized place"
     if request.path.startswith('public_activity_log'):
