@@ -296,10 +296,23 @@ def log_page_view():
         db.session.commit()
         print db.session.query(models.PageViews).filter(models.PageViews.uuid == new_page_view.uuid).first().data
         g.new_page_view_uuid = new_page_view.uuid
-    
+
+def look_up_page_title_and_description(request):
+    page_title = ''
+    page_description = ''
+    print "request path", request.path
+    if request.path = '' OR request.path = '/':
+        page_title = 'Home'
+        page_description = "A site aiming to efficiently publish all the world's interesting public information in one well organized place"
+    if request.path.startswith('public_activity_log'):
+        page_title = 'Public Activity Log'
+        page_description = 'All identifying info about non-subscribers.'
+    return (page_title, page_description)
+
 @app.errorhandler(404) # We always return index.html if route not found because we use Vue.JS routing
 def page_not_found(e):
-    return render_template('index.html', page_view_uuid=g.new_page_view_uuid)
+    page_title, page_description = look_up_page_title_and_description(request)
+    return render_template('index.html', page_view_uuid=g.new_page_view_uuid, page_title=page_title)
 
 @app.route('/api/update_page_view', strict_slashes=False, methods=['POST'])
 def update_page_view():
