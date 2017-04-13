@@ -1,3 +1,4 @@
+requests
 Flask==0.10.1
 Flask-SQLAlchemy==1.0
 itsdangerous==0.24
@@ -14,7 +15,6 @@ alembic
 plaid-python
 flask-socketio
 eventlet
-git+https://github.com/wayeasycorp/communityapis.git
 flask-cors
 flask-failsafe
 uwsgi

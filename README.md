@@ -52,6 +52,8 @@ uwsgi --socket 0.0.0.0:8000 --protocol=http -w wsgi --callable=app
 ```
 sudo cp etc_nginx_sites_available_megatransparency_com /etc/nginx/sites-available/megatransparency.com
 sudo ln -s /etc/nginx/sites-available/megatransparency.com /etc/nginx/sites-enabled/megatransparency.com
+sudo cp etc_nginx_sites_available_dev_megatransparency_com /etc/nginx/sites-available/dev.megatransparency.com
+sudo ln -s /etc/nginx/sites-available/dev.megatransparency.com /etc/nginx/sites-enabled/dev.megatransparency.com
 sudo service nginx restart
 ```
 Below is from http://serverfault.com/questions/775965/wiring-uwsgi-to-work-with-django-and-nginx-on-ubuntu-16-04
@@ -59,6 +61,7 @@ Below is from http://serverfault.com/questions/775965/wiring-uwsgi-to-work-with-
 sudo mkdir /etc/uwsgi/
 sudo mkdir /etc/uwsgi/sites
 sudo cp megatransparency.ini /etc/uwsgi/sites/megatransparency.ini
+sudo cp megatransparency_dev.ini /etc/uwsgi/sites/megatransparency_dev.ini
 sudo cp uwsgi.service /etc/systemd/system/uwsgi.service
 ```
 
