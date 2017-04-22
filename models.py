@@ -74,3 +74,9 @@ class App(db.Model):
         if not 'slug' in kwargs:
             kwargs['slug'] = slugify(kwargs.get('name', ''))
         super().__init__(*args, **kwargs)
+
+class Nicknames(db.Model):
+    __tablename__ = "nicknames"
+    
+    name = db.Column(db.String, primary_key=True)
+    group = db.Column(db.Integer, index=True)

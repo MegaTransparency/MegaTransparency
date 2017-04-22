@@ -219,10 +219,10 @@ class Timeout():
     def raise_timeout(self, *args):
         raise Timeout.Timeout()
 
-@app.route('/api/query_public_data')
+@app.route('/api/query_public_data', methods=['GET', 'POST'])
 def query_public_data():
     try:
-        conn = psycopg2.connect("dbname='megatransparency' user='public_data_query' host='localhost' password='%s' options='-c statement_timeout=3s'" % (app.config['PUBLIC_DATA_QUERY_PASSWORD']))
+        conn = psycopg2.connect("dbname='megatransparency' user='public_data_query' host='localhost' password='%s' options='-c statement_timeout=10s'" % (app.config['PUBLIC_DATA_QUERY_PASSWORD']))
     except:
         return flask.jsonify(success=False, error="can't connect to database as public query user")
     try:
@@ -231,8 +231,9 @@ def query_public_data():
         if not sql:
             return flask.jsonify(success=False, error='sql query is missing')
         cur.execute(sql)
-        data_to_return = [dict([(col[0], str(col[1])) for col in dict(row).items()]) for row in cur.fetchall()]
         columns = [{'name': row[0], 'type': row[1]} for row in cur.description]
+        column_types = dict([(row[0], row[1]) for row in cur.description])
+        data_to_return = [dict([(col[0], col[1] if column_types[col[0]] == 114 else str(col[1])) for col in dict(row).items()]) for row in cur.fetchall()]
         return flask.jsonify(success=True, data=data_to_return, sql=sql, columns=columns)
         cur.close()
         conn.close()
