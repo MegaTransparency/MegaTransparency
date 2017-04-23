@@ -79,4 +79,4 @@ class Nicknames(db.Model):
     __tablename__ = "nicknames"
     
     name = db.Column(db.String, primary_key=True)
-    group = db.Column(db.Integer, index=True)
+    groupi = db.Column(db.Integer, index=True)

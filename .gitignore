@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+etl/nicknames.csv
 etl/socrata/config.json
 etl/socrata/datacatalog.json
 etl/socrata/last_update_times.json
