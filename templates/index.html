@@ -60,11 +60,32 @@
             <h2>
                 {{ page_title }}
             </h2>
+            <textarea id="sql_query"></textarea><Button id="run_sql_query" v-on:click="run_sql_query">
+            Run SQL query</Button>
+            <div v-if="table_data">
+                
+            
+            <mttable :data="table_data" :columns="table_data.columns" :rows="table_data.data">                
+                
+            </mttable></div>
         </div>
        ${is_logged_in}
             <div id="footer">
                 This site uses IP2Location LITE data available from <a href="http://www.ip2location.com">ip2location.com</a>.
             </div>
         </div>
+        <template id="table-template"><div>
+            
+           
+            <p v-if="data.error">
+                ${data.error}
+            </p>
+        <table>
+        <tr><th v-for="column in columns">${column.name}</th></tr>
+            <tr v-for="row in rows">
+                <td v-for="column in columns" style="background:red">${ row[column.name] }</td>
+            </tr>
+            </table> </div>
+    </template>
     </body>
 </html>

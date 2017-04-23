@@ -40,3 +40,4 @@ a:hover {
     text-decoration:none;
 }
 .account_links {float:right}
+#sql_query {width:100%;height:50px;}

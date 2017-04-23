@@ -144,9 +144,6 @@ def set_session():
             redirect(url_for('login'))
     session['oauth_id'] = oauth_data['id']
     next = request.args.get('next', '/')
-    if next.startswith('https://'):
-        import urllib
-        #next = next + '?' + urllib.urlencode({'access_token': access_token, 'session_uuid': session_uuid})
     return redirect(next)
  
 

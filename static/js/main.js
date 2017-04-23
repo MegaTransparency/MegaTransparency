@@ -34,11 +34,17 @@ $(function() {
     $(document).mousemove(debounce(250, function(event) {
         mouse_locations.push({'x': event.pageX, 'y': event.pageY})
     }));
+    Vue.component('mttable', {
+        delimiters: ['${', '}'],
+            template: '#table-template',
+        props: ['data', 'columns', 'rows']
+        });
     var app = new Vue({
       el: '#app',
       data: {
         message: 'Hello Vue!',
-          is_logged_in: false
+          is_logged_in: false,
+          table_data: {},
       },
       delimiters: ['${', '}'],
       created: function() {
@@ -46,6 +52,13 @@ $(function() {
           $.get('/api/is_logged_in', function(data) {
               app.is_logged_in=data.is_logged_in
           })
-      }
+      },
+        methods: {'run_sql_query': function() {
+            url = 'https://megatransparency.com/api/query_public_data?sql='+encodeURIComponent($('#sql_query').val());
+            $.get(url, function(data) {
+                app.$set(app, 'table_data', Object.assign({}, app.table_data, data));
+            })
+            
+        }}
     })
 });
