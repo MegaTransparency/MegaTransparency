@@ -80,3 +80,36 @@ class Nicknames(db.Model):
     
     name = db.Column(db.String, primary_key=True)
     groupi = db.Column(db.Integer, index=True)
+
+
+class SocrataDataCatalog(db.Model):
+    
+    __tablename__ = "socrata_data_catalog"
+    
+    slug = db.Column(db.String, primary_key=True)
+    domain = db.Column(db.String)
+    id = db.Column(db.String)
+    nbe_id = db.Column(db.String)
+    name = db.Column(db.String)
+    type = db.Column(db.String)
+    description = db.Column(db.String)
+    created_at = db.Column(db.DateTime)
+    updated_at = db.Column(db.DateTime)
+    license = db.Column(db.String)
+    provenance = db.Column(db.String)
+    columns = db.Column(postgresql.JSONB)
+    download_count = db.Column(db.Integer)
+    attribution = db.Column(db.String)
+    link = db.Column(db.String)
+    permalink = db.Column(db.String)
+    page_views_last_week = db.Column(db.Integer)
+    page_views_last_month = db.Column(db.Integer)
+    page_views_total = db.Column(db.Integer)
+    page_views_last_week_log = db.Column(db.Float)
+    page_views_last_month_log = db.Column(db.Float)
+    page_views_total_log = db.Column(db.Float)
+
+    def __init__(self, *args, **kwargs):
+        if not 'slug' in kwargs:
+            kwargs['slug'] = slugify('%s %s' % (kwargs.get('domain', ''), kwargs.get('id', '')))
+        super().__init__(*args, **kwargs)

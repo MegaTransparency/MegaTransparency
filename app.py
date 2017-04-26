@@ -61,6 +61,62 @@ def get_user(request):
     else:
         return None 
 
+
+@app.before_request
+def log_page_view():
+    if not ('update_page_view' in request.path or 'set_session' in request.path or 'oauth' in request.path or 'ico' in request.path or 'static' in request.path):
+        
+        session_uuid = session.get('session_uuid')
+        if session_uuid: # validate the session uuid
+            if not db.session.query(models.Session).filter(models.Session.secret_uuid == session.get('session_uuid')):
+                session_uuid = None
+        if not session_uuid:
+            new_session = models.Session(
+                active = False
+            )
+            db.session.add(new_session)
+            db.session.commit()
+            session['session_uuid'] = new_session.secret_uuid
+        ip_address = request.headers.get('X-Forwarded-For', request.remote_addr)
+        if ',' in ip_address:
+            ip_address = ip_address.split(',')[0]
+        data = {"ip_address": ip_address}
+        session_data = db.session.query(models.Session).filter(models.Session.secret_uuid == session.get('session_uuid')).first()
+        data['session_public_uuid'] = str(session_data.public_uuid)
+        data['is_logged_in'] = session_data.active
+        data['url'] = request.url
+        if '?' in data['url']:
+            data['url'] = data['url'][:request.url.index('?')]
+        data['time_arrived'] = calendar.timegm(time.gmtime())*1000
+        data['referrer'] = request.referrer
+        if data['referrer']:
+            if data.get('referrer', '').startswith('https://megatransparency.com/'):
+                if '?' in data.get('referrer', ''):
+                    data['referrer'] = data['referrer'][:request.url.index('?')]
+            if data['referrer'].startswith('https://accounts.google.com/AccountChooser'):
+                data['referrer'] = 'https://accounts.google.com/AccountChooser'
+        data['post_data'] = dict(request.form)
+        data['get_data'] = dict(request.args)
+        if 'session_uuid' in data['get_data']:
+            del data['get_data']['session_uuid']
+        if 'session_uuid' in data['get_data']:
+            del data['get_data']['access_token']
+        print 'SESSION DATA', session_data.user_uuid
+        if session_data.user_uuid:
+            data['user_uuid'] = str(session_data.user_uuid)
+            db.session.query(models.PageViews).filter(models.PageViews.data['session_public_uuid'].astext == str(session_data.public_uuid)).update({'data': cast(cast(models.PageViews.data, JSONB)
+                           .concat(func.jsonb_build_object('user_uuid', str(session_data.user_uuid))), JSON)}, synchronize_session="fetch")
+        user_agent = request.user_agent
+        for key in ['platform', 'browser', 'version', 'language', 'string']:
+            data['user_agent_'+key] = getattr(user_agent, key)
+        new_page_view = models.PageViews(
+            data = data
+        )
+        db.session.add(new_page_view)
+        db.session.commit()
+        print db.session.query(models.PageViews).filter(models.PageViews.uuid == new_page_view.uuid).first().data
+        g.new_page_view_uuid = new_page_view.uuid        
+    
 @app.route('/api/is_logged_in', strict_slashes=False)
 def is_logged_in():
     return flask.jsonify(is_logged_in=bool(get_user(request)))
@@ -195,31 +251,11 @@ def logout():
         pass
     return redirect('/')
 
-import signal
-import time
-
-class Timeout():
-    """Timeout class using ALARM signal."""
-    class Timeout(Exception):
-        pass
- 
-    def __init__(self, sec):
-        self.sec = sec
- 
-    def __enter__(self):
-        signal.signal(signal.SIGALRM, self.raise_timeout)
-        signal.alarm(self.sec)
- 
-    def __exit__(self, *args):
-        signal.alarm(0)    # disable alarm
- 
-    def raise_timeout(self, *args):
-        raise Timeout.Timeout()
-
 @app.route('/api/query_public_data', methods=['GET', 'POST'])
 def query_public_data():
+    timeout_s = 10
     try:
-        conn = psycopg2.connect("dbname='megatransparency' user='public_data_query' host='localhost' password='%s' options='-c statement_timeout=10s'" % (app.config['PUBLIC_DATA_QUERY_PASSWORD']))
+        conn = psycopg2.connect("dbname='megatransparency' user='public_data_query' host='localhost' password='%s' options='-c statement_timeout=%ss'" % (app.config['PUBLIC_DATA_QUERY_PASSWORD'], timeout_s))
     except:
         return flask.jsonify(success=False, error="can't connect to database as public query user")
     try:
@@ -231,69 +267,16 @@ def query_public_data():
         columns = [{'name': row[0], 'type': row[1]} for row in cur.description]
         column_types = dict([(row[0], row[1]) for row in cur.description])
         data_to_return = [dict([(col[0], col[1] if column_types[col[0]] == 114 else str(col[1])) for col in dict(row).items()]) for row in cur.fetchall()]
+        
         return flask.jsonify(success=True, data=data_to_return, sql=sql, columns=columns)
-        cur.close()
-        conn.close()
+        
     except Exception, e:
         error = traceback.format_exc()
+        cur.close()
+        conn.close()
         if 'canceling statement due to statement timeout' in error:
-            error = "query didn't finish within the required three seconds"
-        return flask.jsonify(success=False, error=error)
-
-@app.before_request
-def log_page_view():
-    if not ('update_page_view' in request.path or 'set_session' in request.path or 'oauth' in request.path or 'ico' in request.path or 'static' in request.path):
-        
-        session_uuid = session.get('session_uuid')
-        if session_uuid: # validate the session uuid
-            if not db.session.query(models.Session).filter(models.Session.secret_uuid == session.get('session_uuid')):
-                session_uuid = None
-        if not session_uuid:
-            new_session = models.Session(
-                active = False
-            )
-            db.session.add(new_session)
-            db.session.commit()
-            session['session_uuid'] = new_session.secret_uuid
-        ip_address = request.headers.get('X-Forwarded-For', request.remote_addr)
-        if ',' in ip_address:
-            ip_address = ip_address.split(',')[0]
-        data = {"ip_address": ip_address}
-        session_data = db.session.query(models.Session).filter(models.Session.secret_uuid == session.get('session_uuid')).first()
-        data['session_public_uuid'] = str(session_data.public_uuid)
-        data['is_logged_in'] = session_data.active
-        data['url'] = request.url
-        if '?' in data['url']:
-            data['url'] = data['url'][:request.url.index('?')]
-        data['time_arrived'] = calendar.timegm(time.gmtime())*1000
-        data['referrer'] = request.referrer
-        if data['referrer']:
-            if data.get('referrer', '').startswith('https://megatransparency.com/'):
-                if '?' in data.get('referrer', ''):
-                    data['referrer'] = data['referrer'][:request.url.index('?')]
-            if data['referrer'].startswith('https://accounts.google.com/AccountChooser'):
-                data['referrer'] = 'https://accounts.google.com/AccountChooser'
-        data['post_data'] = dict(request.form)
-        data['get_data'] = dict(request.args)
-        if 'session_uuid' in data['get_data']:
-            del data['get_data']['session_uuid']
-        if 'session_uuid' in data['get_data']:
-            del data['get_data']['access_token']
-        print 'SESSION DATA', session_data.user_uuid
-        if session_data.user_uuid:
-            data['user_uuid'] = str(session_data.user_uuid)
-            db.session.query(models.PageViews).filter(models.PageViews.data['session_public_uuid'].astext == str(session_data.public_uuid)).update({'data': cast(cast(models.PageViews.data, JSONB)
-                           .concat(func.jsonb_build_object('user_uuid', str(session_data.user_uuid))), JSON)}, synchronize_session="fetch")
-        user_agent = request.user_agent
-        for key in ['platform', 'browser', 'version', 'language', 'string']:
-            data['user_agent_'+key] = getattr(user_agent, key)
-        new_page_view = models.PageViews(
-            data = data
-        )
-        db.session.add(new_page_view)
-        db.session.commit()
-        print db.session.query(models.PageViews).filter(models.PageViews.uuid == new_page_view.uuid).first().data
-        g.new_page_view_uuid = new_page_view.uuid
+            error = "query didn't finish within the required %s seconds" % (timeout_s)
+        return flask.jsonify(success=False, error=error, sql=sql)
 
 def look_up_page_title_and_description(request):
     page_title = ''
